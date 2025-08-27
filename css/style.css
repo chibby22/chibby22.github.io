@@ -1,0 +1,157 @@
+/* --- Google Font Import --- */
+/* This line imports custom fonts from Google to be used on the website. */
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@700&family=Playfair+Display:ital,wght@1,700&family=Roboto:wght@400;500;700&display=swap');
+
+/* --- Root Variables for Color Palette --- */
+/* Using CSS variables makes it easy to change the site's color scheme in one place. */
+:root {
+    --primary-navy: #273b69;
+    --accent-orange: #e99f47;
+    --secondary-teal: #00A896;
+    --text-charcoal: #0D1B2A;
+    --bg-offwhite: #F5F7FA;
+    --white: #FFFFFF;
+}
+
+/* --- General Body Styles --- */
+/* These are the base styles that apply to the entire website. */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--white);
+    color: var(--text-charcoal);
+}
+
+/* --- Header Section --- */
+/* Styles for the main header/navigation bar. */
+.site-header {
+    background-color: var(--primary-navy);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky; /* Makes the header stay at the top when scrolling */
+    top: 0;
+    width: 100%;
+    z-index: 1001; /* Ensures the header stays on top of other content */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.logo { width: 100px; height: auto; }
+.header-brand { flex-grow: 1; }
+.brand-name-header { color: var(--bg-offwhite); font-family: 'Agdasima', sans-serif; font-size: 3.2rem; margin: 0; }
+.header-nav .nav-list { display: flex; align-items: center; }
+.header-nav a { color: var(--bg-offwhite); text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 50px; transition: background-color 0.3s, color 0.3s; }
+.header-nav a:hover { background-color: var(--accent-orange); color: var(--white); }
+
+/* Brand Name Link Style */
+.brand-link, .brand-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --- Hamburger Menu (Mobile) --- */
+/* Styles for the mobile menu icon and dropdown. */
+.navbar-toggler { border: none; background: transparent; padding: 0; cursor: pointer; }
+.toggler-icon { display: block; width: 25px; height: 3px; background-color: var(--white); margin: 5px 0; border-radius: 2px; }
+.mobile-nav { display: none; position: absolute; top: 100%; left: 0; width: 100%; background-color: var(--primary-navy); border-top: 1px solid var(--accent-orange); z-index: 1000; }
+.mobile-nav.active { display: block; }
+.mobile-nav a { display: block; color: var(--white); text-decoration: none; padding: 15px 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.mobile-nav a:hover { background-color: var(--accent-orange); }
+
+/* --- Hero Section --- */
+/* Styles for the main landing area at the top of the page. */
+.hero-section { 
+    position: relative; 
+    background-color: var(--primary-navy); 
+    color: var(--white); 
+    min-height: 80vh; 
+    display: flex; 
+    align-items: center; 
+}
+/* This styles the canvas for the particle animation */
+#particle-canvas { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    z-index: 1; 
+}
+.hero-content { position: relative; z-index: 2; padding: 60px 0; }
+.hero-title-italic { font-family: 'Agdasima', sans-serif; font-weight: 700; font-style: normal; font-size: 8rem; color: var(--accent-orange); }
+.hero-title-italic::after { content: '|'; animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.hero-tagline { font-size: 1.4rem; color: var(--secondary-teal); margin-top: 10px; min-height: 1.4rem; }
+.hero-image { max-width: 100%; height: auto; border-radius: 15px; }
+.hero-buttons { display: flex; align-items: center; }
+.btn-action-oval { background-color: var(--accent-orange); color: var(--white); border: 2px solid var(--accent-orange); padding: 10px 30px; font-weight: bold; text-transform: uppercase; border-radius: 50px; transition: background-color 0.3s, color 0.3s; text-decoration: none; }
+.btn-action-oval:hover { background-color: #d38e3a; border-color: #d38e3a; color: var(--white); }
+.btn-secondary-oval { background-color: transparent; color: var(--white); border: 2px solid var(--white); padding: 10px 30px; font-weight: bold; text-transform: uppercase; border-radius: 50px; transition: background-color 0.3s, color 0.3s, border-color 0.3s; text-decoration: none; }
+.btn-secondary-oval:hover { background-color: var(--white); color: var(--primary-navy); border-color: var(--white); }
+
+/* Key Benefits styles */
+.key-benefits { display: flex; flex-wrap: wrap; gap: 20px; color: var(--white); }
+.benefit-item { display: flex; align-items: center; font-size: 1rem; font-weight: 500; }
+.benefit-item i { color: var(--accent-orange); margin-right: 8px; font-size: 1.2rem; }
+
+/* --- General Section Title Style --- */
+.section-title-underline { font-weight: 700; color: var(--text-charcoal); margin-bottom: 1rem; display: inline-block; position: relative; }
+.section-title-underline::after { content: ''; position: absolute; bottom: -10px; left: 0; width: 50px; height: 4px; background-color: var(--accent-orange); }
+
+/* --- About Us & Founder Section --- */
+.about-us-image { width: 100%; max-width: 350px; height: auto; border-radius: 50%; object-fit: cover; border: 5px solid var(--bg-offwhite); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+.about-text { font-size: 1.1rem; line-height: 1.7; color: #555; }
+.founder-section { border-top: 1px solid #eee; }
+.founder-photo { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.founder-title { font-weight: 700; color: var(--primary-navy); }
+.social-icons .social-icon { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: var(--bg-offwhite); color: var(--primary-navy); text-decoration: none; margin-right: 10px; transition: background-color 0.3s, color 0.3s; font-size: 1.1rem; }
+.social-icons .social-icon:hover { background-color: var(--accent-orange); color: var(--white); }
+
+/* --- Services Section --- */
+#services { background-color: var(--bg-offwhite); }
+.service-category-title { font-size: 1.6rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 1rem; }
+.service-card { background-color: var(--white); padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; height: 100%; }
+.service-card:hover { transform: translateY(-10px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+.service-icon { font-size: 2.5rem; color: var(--secondary-teal); margin-bottom: 15px; }
+.service-title { font-size: 1.4rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 10px; }
+.service-description { font-size: 1rem; color: #666; }
+.other-services-note { font-style: italic; color: var(--secondary-teal); }
+
+/* --- Satisfaction Guarantee Section --- */
+#guarantee { background-color: var(--primary-navy); color: var(--white); }
+.guarantee-text { font-weight: 700; font-size: 1.5rem; margin: 0; }
+.guarantee-text .fa-check-circle { color: #28a745; margin-right: 10px; }
+
+/* --- Contact Section --- */
+.contact-info { padding: 0; }
+.contact-info li { display: flex; align-items: center; font-size: 1.1rem; margin-bottom: 20px; color: var(--text-charcoal); }
+.contact-info i { font-size: 1.5rem; color: var(--accent-orange); margin-right: 20px; width: 30px; text-align: center; }
+.contact-form .form-control { border-radius: 5px; padding: 12px; border: 1px solid #ddd; }
+.contact-form .form-control:focus { border-color: var(--primary-navy); box-shadow: 0 0 0 0.25rem rgba(11, 61, 145, 0.25); }
+
+/* --- Footer --- */
+.site-footer-new { background-color: var(--text-charcoal); color: var(--bg-offwhite); padding: 25px 0; text-align: center; }
+.site-footer-new p { margin: 0; font-size: 0.9rem; }
+.social-icons-footer .social-icon { color: var(--bg-offwhite); font-size: 1.3rem; margin: 0 10px; transition: color 0.3s; text-decoration: none; }
+.social-icons-footer .social-icon:hover { color: var(--accent-orange); }
+
+/* --- Scroll Animation --- */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+.fade-in.is-visible { opacity: 1; transform: translateY(0); }
+
+/* --- Mobile Responsiveness --- */
+/* These styles apply only to screens 767px wide or smaller (like phones). */
+@media (max-width: 767px) {
+    .hero-section { text-align: center; }
+    .hero-buttons { justify-content: center; }
+    .hero-text-content { margin-top: 30px; }
+    .hero-title-italic { font-size: 2.5rem; }
+    .hero-tagline { font-size: 1.1rem; }
+    .key-benefits { justify-content: center; }
+    .section-title-underline { text-align: center; }
+    .section-title-underline::after { left: 50%; transform: translateX(-50%); }
+    .about-us-image { max-width: 250px; }
+    .founder-section { text-align: center; }
+    .brand-name-header { font-size: 1.5rem; }
+}

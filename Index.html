@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CP Solutions</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima:wght@700&family=Playfair+Display:ital,wght@1,700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a2e0f6a42f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <header class="site-header">
+        <a href="#" class="header-logo"><img src="hero2.png" alt="CP Solutions Logo" class="logo"></a>
+        
+        <div class="header-brand text-center">
+            <a href="#home" class="brand-link">
+                <h1 class="brand-name-header">CP Solutions</h1>
+            </a>
+        </div>
+        
+        <nav class="header-nav d-none d-md-flex">
+            <ul class="nav-list list-unstyled m-0 p-0">
+                <li class="ms-2"><a href="#home">Home</a></li>
+                <li class="ms-2"><a href="#about">About</a></li>
+                <li class="ms-2"><a href="#services">Services</a></li>
+                <li class="ms-2"><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <button class="navbar-toggler d-md-none" type="button">
+            <span class="toggler-icon"></span><span class="toggler-icon"></span><span class="toggler-icon"></span>
+        </button>
+        
+        <div class="mobile-nav">
+            <a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#contact">Contact</a>
+        </div>
+    </header>
+
+    <section id="home" class="hero-section">
+        <canvas id="particle-canvas"></canvas>
+        
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center order-md-2">
+                    <img src="cp_logo_trans.jpg" alt="Versatile solutions" class="img-fluid hero-image">
+                </div>
+                <div class="col-md-6 hero-text-content order-md-1">
+                    <h2 class="hero-title-italic" id="typing-text"></h2>
+                    <p class="hero-tagline"><span id="cycling-tagline"></span></p>
+                    <div class="key-benefits mt-4">
+                        <div class="benefit-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Save Time & Hassle</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-star"></i>
+                            <span>Expert & Professional</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-user-check"></i>
+                            <span>One Trusted Contact</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-pound-sign"></i>
+                            <span>Prices from £15</span>
+                        </div>
+                    </div>
+                    <div class="hero-buttons mt-4">
+                        <a href="#services" class="btn btn-action-oval">Our Services</a>
+                        <a href="#contact" class="btn btn-secondary-oval ms-3">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 text-center fade-in">
+                    <img src="about_us.jpg" alt="About CP Solutions" class="about-us-image">
+                </div>
+                <div class="col-lg-7 mt-4 mt-lg-0 fade-in">
+                    <h2 class="section-title-underline">About Us</h2>
+                    <p class="about-text">
+                        At CP Solutions, our commitment is to find a solution for any problem you face. We are a trustworthy, go-to destination for a wide array of professional services, dedicated to providing an exceptional and reliable experience, whether you need a quick repair, a creative project, or help with daily tasks.
+                    </p>
+                    <p class="about-text">
+                        If a required service falls outside our direct expertise, we have a network of other trusted individuals ready to help. We will ensure they provide the same professional service we offer. Don't be shy—all you need to do is ask. If we can't do it, we will find the right individual to complete the task for you. For more help and advice, you can also check out our social media pages.
+                    </p>
+                </div>
+            </div>
+            <div class="row align-items-center mt-5 pt-4 founder-section fade-in">
+                <div class="col-md-3 text-center">
+                    <img src="photo.heic" alt="Promise O., Founder of CP Solutions" class="founder-photo">
+                </div>
+                <div class="col-md-9">
+                    <h3 class="founder-title">Our Founder</h3>
+                    <p class="about-text">
+                        CP Solutions was founded by Promise O., an Electronic and Electrical Engineer who is extremely handy, passionate, and professional. Willing to tackle any challenge with a creative mind, Promise's aim is to provide the best service for every customer and ensure complete satisfaction every time.
+                    </p>
+                    <div class="social-icons mt-4">
+                        <a href="#" target="_blank" class="social-icon" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank" class="social-icon" aria-label="Visit our Instagram page"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank" class="social-icon" aria-label="Visit our TikTok page"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-5 bg-light">
+        <div class="container text-center">
+            <h2 class="section-title-underline fade-in">Our Services</h2>
+            <h3 class="service-category-title mt-5 fade-in">Home & Repair</h3>
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-4 col-md-6 mb-4 fade-in"><div class="service-card"><i class="fas fa-tools service-icon"></i><h3 class="service-title">Handyman & Repairs</h3><p class="service-description">Our reliable handyman services cover a wide range of home repair needs, from small fixes to common household problems.</p></div></div>
+                <div class="col-lg-4 col-md-6 mb-4 fade-in"><div class="service-card"><i class="fas fa-couch service-icon"></i><h3 class="service-title">Furniture Assembly</h3><p class="service-description">We build your flat-pack furniture quickly and correctly, saving you time and frustration.</p></div></div>
+                <div class="col-lg-4 col-md-6 mb-4 fade-in"><div class="service-card"><i class="fas fa-tv service-icon"></i><h3 class="service-title">Electronics Repair</h3><p class="service-description">We diagnose and repair a wide range of electronic devices—including laptops, phones, and other household gadgets—getting them back in working order.</p></div></div>
+            </div>
+            <h3 class="service-category-title mt-5 fade-in">Lifestyle Services</h3>
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-4 col-md-6 mb-4 fade-in"><div class="service-card"><i class="fas fa-broom service-icon"></i><h3 class="service-title">Cleaning</h3><p class="service-description">Our professional cleaning services leave your home or office spotless, creating a fresh and healthy environment.</p></div></div>
+                <div class="col-lg-4 col-md-6 mb-4 fade-in"><div class="service-card"><i class="fas fa-shopping-basket service-icon"></i><h3 class="service-title">Personal Shopper</h3><p class="service-description">From your weekly groceries to researching specific products, our personal shopping service saves you time and hassle. We focus on finding exactly what you need for the best price, tailored to your budget and specifications.</p></div></div>
+            </div>
+            <h3 class="service-category-title mt-5 fade-in">Creative Services</h3>
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-4 col-md-6 mb-4 fade-in"><div class="service-card"><i class="fas fa-video service-icon"></i><h3 class="service-title">Cinematography</h3><p class="service-description">Our creative cinematography service, which includes both video and photography, is perfect for capturing special events or producing promotional content for your business to drive sales.</p></div></div>
+                <div class="col-lg-4 col-md-6 mb-4 fade-in"><div class="service-card"><i class="fas fa-code service-icon"></i><h3 class="service-title">Website Designer</h3><p class="service-description">Our team will help create the design you have in mind for the most competitive price on the market, building modern, responsive websites that help you achieve your online goals.</p></div></div>
+            </div>
+            <p class="other-services-note mt-5 fade-in">
+                Don't see what you need? Other services are available on request. Just get in touch.
+            </p>
+        </div>
+    </section>
+    
+    <section id="guarantee" class="py-4 text-center">
+        <div class="container fade-in">
+            <h3 class="guarantee-text"><i class="fas fa-check-circle"></i> Customer Satisfaction Guaranteed</h3>
+        </div>
+    </section>
+
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="section-title-underline text-center fade-in">Contact Us</h2>
+            <div class="row mt-5">
+                <div class="col-lg-5 fade-in">
+                    <ul class="contact-info list-unstyled">
+                        <li><i class="fas fa-map-marker-alt"></i> Wythenshawe, Manchester</li>
+                        <li><i class="fas fa-envelope"></i> CP_solution@outlook.com</li>
+                        <li><i class="fas fa-phone"></i> +447404771423</li>
+                    </ul>
+                </div>
+                <div class="col-lg-7 mt-4 mt-lg-0 fade-in">
+                    <form action="https://formspree.io/f/myzdgjgl" method="POST" class="contact-form">
+                        <div class="mb-3"><input type="text" name="name" placeholder="Your Name" required class="form-control"></div>
+                        <div class="mb-3"><input type="email" name="_replyto" placeholder="Your Email" required class="form-control"></div>
+                        <div class="mb-3"><textarea name="message" placeholder="Your Message" rows="5" required class="form-control"></textarea></div>
+                        <button type="submit" class="btn btn-action-oval">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer-new">
+        <div class="container">
+            <div class="social-icons-footer mb-3">
+                <a href="#" target="_blank" class="social-icon" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" class="social-icon" aria-label="Visit our Instagram page"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" class="social-icon" aria-label="Visit our TikTok page"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p class="mb-0">&copy; 2025 CP Solutions. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/Script.js"></script>
+</body>
+</html>
