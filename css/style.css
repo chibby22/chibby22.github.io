@@ -120,6 +120,11 @@ body {
 /* --- About Us & Founder Section --- */
 .about-text { font-size: 1.1rem; line-height: 1.7; color: #555; }
 
+/* NEW: Removes underline from icon links */
+#about a {
+    text-decoration: none;
+}
+
 /* --- Interactive Icon Grid (New About Section) --- */
 .about-content-wrapper {
     position: relative;
@@ -260,7 +265,7 @@ body {
     position: relative;
 }
 .founder-photo:hover {
-    transform: scale(1.05);
+    transform: scale(1.10);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 .founder-title { font-weight: 700; color: var(--primary-navy); }
