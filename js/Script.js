@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     // --- Mobile Menu Toggle Functionality ---
+    // This code handles the opening and closing of the mobile navigation menu.
     const navbarToggler = document.querySelector('.navbar-toggler');
     const mobileNav = document.querySelector('.mobile-nav');
     if (navbarToggler && mobileNav) {
@@ -11,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --- Smooth Scroll for All Navigation Links ---
+    // This makes the page scroll smoothly when a nav link is clicked.
     const allNavLinks = document.querySelectorAll('a[href^="#"]');
     allNavLinks.forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -30,7 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 1. Typing Animation for the Main Title
     const typingTextElement = document.getElementById('typing-text');
-    const textToType = "CP Solutions";
+    // UPDATED: New brand name
+    const textToType = "KYNECTED";
     let i = 0;
     function typeWriter() {
         if (typingTextElement && i < textToType.length) {
@@ -45,10 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // 2. Cycling Taglines
     const taglineElement = document.getElementById('cycling-tagline');
     const taglines = [
-        "One call for a helping hand...",
-        "One call for a creative vision...",
-        "One call for a simpler life...",
-        "One call for every solution."
+        "One call, simplify your life...",
+        "One call, get connected...",
+        "One call for every solution!"
     ];
     let taglineIndex = 0;
     function cycleTaglines() {
@@ -64,12 +66,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 500); // This is the fade transition time.
     }
+    // Start the tagline cycling after the main title has finished typing.
     setTimeout(cycleTaglines, (textToType.length * 150) + 500);
 
 
     // 3. Interactive Particle Background
     const canvas = document.getElementById('particle-canvas');
-    if (canvas) {
+    // UPDATED: Check if the screen is wider than a typical mobile phone (768px) before running the animation.
+    // This prevents lag on less powerful devices.
+    if (canvas && window.innerWidth > 768) {
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = canvas.parentElement.offsetHeight;
@@ -165,13 +170,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Scroll-triggered Fade-in Animation ---
     const animatedElements = document.querySelectorAll('.fade-in');
+    // This creates an "observer" that watches for elements entering the viewport.
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
+            // If an element is intersecting (visible), add the 'is-visible' class.
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1 }); // The animation triggers when 10% of the element is visible.
+    
+    // Tell the observer to watch each element with the 'fade-in' class.
     animatedElements.forEach(el => {
         observer.observe(el);
     });
