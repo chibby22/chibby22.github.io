@@ -1,0 +1,6 @@
+# Allow all search engine crawlers to access the entire site. 
+User-agent: * 
+Disallow: 
+
+# Provide the location of the sitemap. 
+Sitemap: https://www.kynected.co.uk/sitemap.xml
