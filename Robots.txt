@@ -1,6 +1,100 @@
-# Allow all search engine crawlers to access the entire site. 
-User-agent: * 
-Disallow: 
+# robots.txt — kynected.co.uk
+# Last updated: 2025
 
-# Provide the location of the sitemap. 
-Sitemap: https://www.kynected.co.uk/sitemap.xml
+# -----------------------------------------------
+# ALLOW: Google (search indexing + AI overviews)
+# -----------------------------------------------
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Google-InspectionTool
+Allow: /
+
+# -----------------------------------------------
+# ALLOW: Bing and Microsoft (search indexing)
+# -----------------------------------------------
+User-agent: Bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+# -----------------------------------------------
+# ALLOW: Other legitimate search engines
+# -----------------------------------------------
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: ia_archiver
+Allow: /
+
+# -----------------------------------------------
+# ALLOW: SEO and performance crawlers
+# -----------------------------------------------
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: SemrushBot
+Allow: /
+
+User-agent: MJ12bot
+Allow: /
+
+User-agent: DotBot
+Allow: /
+
+# -----------------------------------------------
+# BLOCK: AI training scrapers (scrape content
+# to train models without indexing your site)
+# -----------------------------------------------
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+# -----------------------------------------------
+# DEFAULT: Allow all unspecified crawlers
+# -----------------------------------------------
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.kynected.co.uk/sitemap.xml 
+
