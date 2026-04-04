@@ -20,7 +20,7 @@
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
 
-    <!-- Block harmful AI scrapers only — beneficial crawlers allowed via robots.txt -->
+    <!-- Block harmful AI scrapers only -->
     <meta name="CCBot" content="noindex, nofollow">
     <meta name="Omgilibot" content="noindex, nofollow">
     <meta name="Bytespider" content="noindex, nofollow">
@@ -41,6 +41,21 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-5T3MKLB90Q');
+    </script>
+
+    <!-- Inline consent check — runs before DOM renders to suppress gate if already decided -->
+    <script>
+    (function() {
+        try {
+            var raw = localStorage.getItem('kynected_consent_v2');
+            if (raw) {
+                var s = document.createElement('style');
+                s.id = 'consent-hide';
+                s.textContent = '#cookie-gate,#cookie-backdrop{display:none!important}';
+                document.head.appendChild(s);
+            }
+        } catch(e) {}
+    })();
     </script>
 
     <!-- LocalBusiness Schema -->
@@ -224,14 +239,14 @@
         </div>
     </section>
 
-    <!-- SERVICES ACCORDION — Lifestyle first, then Home & Repair -->
+    <!-- SERVICES ACCORDION — Lifestyle first -->
     <section id="services" class="py-5" aria-labelledby="services-heading">
         <div class="container">
             <h2 class="section-title-underline text-center fade-in" id="services-heading">Our Services</h2>
             <p class="services-intro text-center mt-4 fade-in">Select a category to see what we offer.</p>
             <div class="services-accordion mt-4" id="servicesAccordion">
 
-                <!-- LIFESTYLE — moved first -->
+                <!-- LIFESTYLE — first -->
                 <div class="accordion-service-group fade-in">
                     <button class="accordion-service-btn" aria-expanded="false" aria-controls="lifestyle-panel">
                         <span class="accordion-btn-left"><i class="fas fa-concierge-bell" aria-hidden="true"></i>Lifestyle Services</span>
@@ -245,7 +260,7 @@
                                         <div class="flip-card-front">
                                             <i class="fas fa-broom service-icon" aria-hidden="true"></i>
                                             <h3 class="service-title">Cleaning</h3>
-                                            <p class="flip-hint">Hover to learn more</p>
+                                            <p class="flip-hint">Tap to learn more</p>
                                         </div>
                                         <div class="flip-card-back">
                                             <h3 class="service-title">Cleaning</h3>
@@ -261,7 +276,7 @@
                                         <div class="flip-card-front">
                                             <i class="fas fa-concierge-bell service-icon" aria-hidden="true"></i>
                                             <h3 class="service-title">Personal Concierge</h3>
-                                            <p class="flip-hint">Hover to learn more</p>
+                                            <p class="flip-hint">Tap to learn more</p>
                                         </div>
                                         <div class="flip-card-back">
                                             <h3 class="service-title">Personal Concierge</h3>
@@ -276,11 +291,11 @@
                                         <div class="flip-card-front">
                                             <i class="fas fa-shopping-basket service-icon" aria-hidden="true"></i>
                                             <h3 class="service-title">Personal Shopper &amp; Collection</h3>
-                                            <p class="flip-hint">Hover to learn more</p>
+                                            <p class="flip-hint">Tap to learn more</p>
                                         </div>
                                         <div class="flip-card-back">
                                             <h3 class="service-title">Personal Shopper &amp; Collection</h3>
-                                            <p class="service-description">We find what you need at the best price, pick up parcels and collect items bought through Facebook Marketplace across Manchester. No waiting in, no awkward collection trips.</p>
+                                            <p class="service-description">We find what you need at the best price, pick up parcels and collect items bought through Facebook Marketplace across Manchester. No waiting in, no awkward trips.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -303,7 +318,7 @@
                                         <div class="flip-card-front">
                                             <i class="fas fa-tools service-icon" aria-hidden="true"></i>
                                             <h3 class="service-title">Handyman &amp; Repairs</h3>
-                                            <p class="flip-hint">Hover to learn more</p>
+                                            <p class="flip-hint">Tap to learn more</p>
                                         </div>
                                         <div class="flip-card-back">
                                             <h3 class="service-title">Handyman &amp; Repairs</h3>
@@ -318,7 +333,7 @@
                                         <div class="flip-card-front">
                                             <i class="fas fa-couch service-icon" aria-hidden="true"></i>
                                             <h3 class="service-title">Furniture Assembly</h3>
-                                            <p class="flip-hint">Hover to learn more</p>
+                                            <p class="flip-hint">Tap to learn more</p>
                                         </div>
                                         <div class="flip-card-back">
                                             <h3 class="service-title">Furniture Assembly</h3>
@@ -333,68 +348,11 @@
                                         <div class="flip-card-front">
                                             <i class="fas fa-laptop service-icon" aria-hidden="true"></i>
                                             <h3 class="service-title">Electronics Repair &amp; Cleaning</h3>
-                                            <p class="flip-hint">Hover to learn more</p>
+                                            <p class="flip-hint">Tap to learn more</p>
                                         </div>
                                         <div class="flip-card-back">
                                             <h3 class="service-title">Electronics Repair &amp; Cleaning</h3>
                                             <p class="service-description">Laptops, phones, PCs and PS5s repaired, reset or deep cleaned. If your device is slow, noisy or not working, we sort it.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ADVISORY & BROKERAGE -->
-                <div class="accordion-service-group fade-in">
-                    <button class="accordion-service-btn" aria-expanded="false" aria-controls="advisory-panel">
-                        <span class="accordion-btn-left"><i class="fas fa-lightbulb" aria-hidden="true"></i>Advisory &amp; Brokerage</span>
-                        <i class="fas fa-chevron-down accordion-arrow" aria-hidden="true"></i>
-                    </button>
-                    <div class="accordion-service-panel" id="advisory-panel" role="region" aria-label="Advisory and Brokerage services">
-                        <div class="row justify-content-center pt-3 pb-2">
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="flip-card">
-                                    <div class="flip-card-inner">
-                                        <div class="flip-card-front">
-                                            <i class="fas fa-comments service-icon" aria-hidden="true"></i>
-                                            <h3 class="service-title">Advice</h3>
-                                            <p class="flip-hint">Hover to learn more</p>
-                                        </div>
-                                        <div class="flip-card-back">
-                                            <h3 class="service-title">Advice</h3>
-                                            <p class="service-description">Not sure what service you need or where to start? We talk it through with you, help you understand your options and point you in the right direction. No jargon, no pressure.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="flip-card">
-                                    <div class="flip-card-inner">
-                                        <div class="flip-card-front">
-                                            <i class="fas fa-handshake service-icon" aria-hidden="true"></i>
-                                            <h3 class="service-title">Service Broker</h3>
-                                            <p class="flip-hint">Hover to learn more</p>
-                                        </div>
-                                        <div class="flip-card-back">
-                                            <h3 class="service-title">Service Broker</h3>
-                                            <p class="service-description">Need something we don't offer directly? We find the right professional for the job, negotiate on your behalf and manage the process end to end. You deal with one contact, we handle the rest.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="flip-card">
-                                    <div class="flip-card-inner">
-                                        <div class="flip-card-front">
-                                            <i class="fas fa-bullhorn service-icon" aria-hidden="true"></i>
-                                            <h3 class="service-title">Advertising &amp; Promotion</h3>
-                                            <p class="flip-hint">Hover to learn more</p>
-                                        </div>
-                                        <div class="flip-card-back">
-                                            <h3 class="service-title">Advertising &amp; Promotion</h3>
-                                            <p class="service-description">Want your business in front of the right people in Manchester? We offer promotional services through the Kynected platform and community network. Get in touch to find out more.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -417,7 +375,7 @@
                                         <div class="flip-card-front">
                                             <i class="fas fa-video service-icon" aria-hidden="true"></i>
                                             <h3 class="service-title">Cinematography &amp; Photography</h3>
-                                            <p class="flip-hint">Hover to learn more</p>
+                                            <p class="flip-hint">Tap to learn more</p>
                                         </div>
                                         <div class="flip-card-back">
                                             <h3 class="service-title">Cinematography &amp; Photography</h3>
@@ -432,7 +390,7 @@
                                         <div class="flip-card-front">
                                             <i class="fas fa-code service-icon" aria-hidden="true"></i>
                                             <h3 class="service-title">Website Design</h3>
-                                            <p class="flip-hint">Hover to learn more</p>
+                                            <p class="flip-hint">Tap to learn more</p>
                                         </div>
                                         <div class="flip-card-back">
                                             <h3 class="service-title">Website Design</h3>
@@ -454,81 +412,79 @@
     <section id="cleaning" class="py-5 cleaning-section" aria-labelledby="cleaning-heading">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6 fade-in">
+                <div class="col-lg-8 col-md-10 mx-auto fade-in">
                     <span class="cleaning-label">Featured Service</span>
-                    <h2 class="section-title-underline mt-2" id="cleaning-heading">Professional Cleaning Services in Manchester</h2>
+                    <h2 class="section-title-underline mt-2" id="cleaning-heading">Professional Cleaning in Manchester</h2>
                     <p class="about-text mt-4">A clean space changes how you feel in it. Whether it's your home, your office, your Airbnb or your electronics, we send trusted professionals who get the job done properly.</p>
                     <p class="about-text">We work around your schedule. One-off, regular or urgent turnarounds, we cover it all.</p>
 
-                    <!-- Interactive cleaning service banner -->
+                    <!-- Interactive service banner -->
                     <div class="cleaning-type-tabs mt-4" role="tablist" aria-label="Cleaning types">
-                        <button class="cleaning-tab active" data-target="clean-domestic" role="tab" aria-selected="true">Home</button>
-                        <button class="cleaning-tab" data-target="clean-airbnb" role="tab" aria-selected="false">Airbnb</button>
-                        <button class="cleaning-tab" data-target="clean-office" role="tab" aria-selected="false">Office</button>
-                        <button class="cleaning-tab" data-target="clean-deep" role="tab" aria-selected="false">Deep Clean</button>
-                        <button class="cleaning-tab" data-target="clean-electronics" role="tab" aria-selected="false">Electronics</button>
-                    </div>
-                    <div class="cleaning-tab-panels mt-3">
-                        <div class="cleaning-tab-panel active" id="clean-domestic">
-                            <p class="cleaning-tab-text">Kitchens, bathrooms, bedrooms and living rooms. We leave your home spotless, every visit.</p>
-                        </div>
-                        <div class="cleaning-tab-panel" id="clean-airbnb">
-                            <p class="cleaning-tab-text">Quick, thorough turnaround cleans between guest stays. Your listing stays fresh, your reviews stay strong.</p>
-                        </div>
-                        <div class="cleaning-tab-panel" id="clean-office">
-                            <p class="cleaning-tab-text">A clean workspace helps your team focus. We handle it so you don't have to think about it.</p>
-                        </div>
-                        <div class="cleaning-tab-panel" id="clean-deep">
-                            <p class="cleaning-tab-text">Moving in, moving out or long overdue. We get into every corner and leave nothing behind.</p>
-                        </div>
-                        <div class="cleaning-tab-panel" id="clean-electronics">
-                            <p class="cleaning-tab-text">PS5, PC, laptop and gaming setup cleaning. We remove the dust and buildup that slows your device down.</p>
-                        </div>
+                        <button class="cleaning-tab active" data-target="clean-domestic" role="tab" aria-selected="true">
+                            <i class="fas fa-home"></i><span>Home</span>
+                        </button>
+                        <button class="cleaning-tab" data-target="clean-airbnb" role="tab" aria-selected="false">
+                            <i class="fas fa-key"></i><span>Airbnb</span>
+                        </button>
+                        <button class="cleaning-tab" data-target="clean-office" role="tab" aria-selected="false">
+                            <i class="fas fa-building"></i><span>Office</span>
+                        </button>
+                        <button class="cleaning-tab" data-target="clean-deep" role="tab" aria-selected="false">
+                            <i class="fas fa-spray-can"></i><span>Deep Clean</span>
+                        </button>
+                        <button class="cleaning-tab" data-target="clean-electronics" role="tab" aria-selected="false">
+                            <i class="fas fa-gamepad"></i><span>Electronics</span>
+                        </button>
                     </div>
 
-                    <ul class="cleaning-features mt-3">
-                        <li><i class="fas fa-check-circle" aria-hidden="true"></i>Domestic and commercial cleaning</li>
-                        <li><i class="fas fa-check-circle" aria-hidden="true"></i>Airbnb turnaround cleaning between guest stays</li>
-                        <li><i class="fas fa-check-circle" aria-hidden="true"></i>PS5, laptop, PC and electronics cleaning</li>
-                        <li><i class="fas fa-check-circle" aria-hidden="true"></i>One-off deep cleans and regular bookings</li>
-                        <li><i class="fas fa-check-circle" aria-hidden="true"></i>Vetted, trusted professionals only</li>
-                        <li><i class="fas fa-check-circle" aria-hidden="true"></i>Satisfaction guaranteed on every clean</li>
-                    </ul>
-                    <a href="#contact" class="btn-action-oval mt-4 d-inline-block">Book a Clean</a>
-                </div>
-                <div class="col-lg-6 mt-5 mt-lg-0 fade-in">
-                    <div class="cleaning-stats-grid">
-                        <div class="cleaning-stat-card">
-                            <i class="fas fa-home" aria-hidden="true"></i>
-                            <h4>Domestic Cleaning</h4>
-                            <p>Kitchens, bathrooms, bedrooms and living rooms done to a high standard, every time.</p>
+                    <div class="cleaning-tab-panels mt-3">
+                        <div class="cleaning-tab-panel active" id="clean-domestic" role="tabpanel">
+                            <div class="cleaning-panel-content">
+                                <i class="fas fa-home cleaning-panel-icon" aria-hidden="true"></i>
+                                <div>
+                                    <h4 class="cleaning-panel-title">Domestic Cleaning</h4>
+                                    <p class="cleaning-panel-text">Kitchens, bathrooms, bedrooms and living rooms. We leave your home spotless, every visit. Flexible weekly, fortnightly or one-off bookings.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="cleaning-stat-card">
-                            <i class="fas fa-key" aria-hidden="true"></i>
-                            <h4>Airbnb Cleaning</h4>
-                            <p>Quick, thorough turnaround cleans between stays. We keep your listing fresh and your reviews strong.</p>
+                        <div class="cleaning-tab-panel" id="clean-airbnb" role="tabpanel">
+                            <div class="cleaning-panel-content">
+                                <i class="fas fa-key cleaning-panel-icon" aria-hidden="true"></i>
+                                <div>
+                                    <h4 class="cleaning-panel-title">Airbnb Cleaning</h4>
+                                    <p class="cleaning-panel-text">Quick, thorough turnaround cleans between guest stays. Your listing stays fresh, your reviews stay strong. We work around your booking calendar.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="cleaning-stat-card">
-                            <i class="fas fa-gamepad" aria-hidden="true"></i>
-                            <h4>Electronics Cleaning</h4>
-                            <p>PS5, PC, laptop and gaming setup cleaning. We remove the dust and buildup that slows your device down.</p>
+                        <div class="cleaning-tab-panel" id="clean-office" role="tabpanel">
+                            <div class="cleaning-panel-content">
+                                <i class="fas fa-building cleaning-panel-icon" aria-hidden="true"></i>
+                                <div>
+                                    <h4 class="cleaning-panel-title">Office Cleaning</h4>
+                                    <p class="cleaning-panel-text">A clean workspace helps your team focus. We handle it regularly so you don't have to think about it, done before your team arrives or after they leave.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="cleaning-stat-card">
-                            <i class="fas fa-building" aria-hidden="true"></i>
-                            <h4>Office Cleaning</h4>
-                            <p>A clean workspace helps people focus. We handle it so you don't have to think about it.</p>
+                        <div class="cleaning-tab-panel" id="clean-deep" role="tabpanel">
+                            <div class="cleaning-panel-content">
+                                <i class="fas fa-spray-can cleaning-panel-icon" aria-hidden="true"></i>
+                                <div>
+                                    <h4 class="cleaning-panel-title">Deep Cleaning</h4>
+                                    <p class="cleaning-panel-text">Moving in, moving out or long overdue. We get into every corner, every surface, every shelf. Nothing is left behind.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="cleaning-stat-card">
-                            <i class="fas fa-spray-can" aria-hidden="true"></i>
-                            <h4>Deep Cleaning</h4>
-                            <p>Moving in, moving out or just overdue. We get into every corner and leave nothing behind.</p>
-                        </div>
-                        <div class="cleaning-stat-card">
-                            <i class="fas fa-calendar-check" aria-hidden="true"></i>
-                            <h4>Regular Bookings</h4>
-                            <p>Set up a weekly or fortnightly schedule and we take it from there. No chasing, no reminders needed.</p>
+                        <div class="cleaning-tab-panel" id="clean-electronics" role="tabpanel">
+                            <div class="cleaning-panel-content">
+                                <i class="fas fa-gamepad cleaning-panel-icon" aria-hidden="true"></i>
+                                <div>
+                                    <h4 class="cleaning-panel-title">Electronics Cleaning</h4>
+                                    <p class="cleaning-panel-text">PS5, PC, laptop and gaming setup cleaning. We remove the dust and buildup that slows your device down and causes overheating.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <a href="#contact" class="btn-action-oval mt-4 d-inline-block">Book a Clean</a>
                 </div>
             </div>
         </div>
@@ -541,7 +497,7 @@
         </div>
     </section>
 
-    <!-- REVIEWS — inline testimonial strip -->
+    <!-- REVIEWS — inline strip -->
     <section id="reviews" class="py-5 reviews-section" aria-labelledby="reviews-heading">
         <div class="container">
             <h2 class="section-title-underline text-center fade-in" id="reviews-heading">What Our Customers Say</h2>
@@ -566,8 +522,8 @@
                 <div class="review-strip-divider" aria-hidden="true"></div>
 
                 <div class="review-strip-item">
-                    <div class="review-strip-stars" aria-label="5 stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <div class="review-strip-stars" aria-label="4.5 stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
                     </div>
                     <p class="review-strip-text">"Had two IKEA wardrobes sitting in boxes for about three weeks because I kept putting it off. Kynected came over and knocked both out in under four hours. Wish I'd called sooner to be honest."</p>
                     <div class="review-strip-author">
@@ -582,8 +538,8 @@
                 <div class="review-strip-divider" aria-hidden="true"></div>
 
                 <div class="review-strip-item">
-                    <div class="review-strip-stars" aria-label="4 stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                    <div class="review-strip-stars" aria-label="5 stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
                     <p class="review-strip-text">"Fast and reliable. I use them to clean my apartments. Consistent every time."</p>
                     <div class="review-strip-author">
@@ -598,8 +554,8 @@
                 <div class="review-strip-divider" aria-hidden="true"></div>
 
                 <div class="review-strip-item">
-                    <div class="review-strip-stars" aria-label="5 and a half stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    <div class="review-strip-stars" aria-label="5 stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
                     <p class="review-strip-text">"Laptop was completely dead, wouldn't even boot. They diagnosed and fixed it in a day. Impressed."</p>
                     <div class="review-strip-author">
@@ -614,8 +570,8 @@
                 <div class="review-strip-divider" aria-hidden="true"></div>
 
                 <div class="review-strip-item">
-                    <div class="review-strip-stars" aria-label="5 stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <div class="review-strip-stars" aria-label="4 stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
                     </div>
                     <p class="review-strip-text">"My PS5 was overheating and sounding like a jet engine. Got it cleaned and it's running quiet again. Proper job, reasonably priced."</p>
                     <div class="review-strip-author">
@@ -642,23 +598,22 @@
                 <span class="cleaning-label">Community</span>
                 <h2 class="section-title-underline mt-2" id="events-heading">Kynected Events</h2>
                 <p class="about-text mt-4 events-intro-text">
-                    We're not just here for services. KYNECTED is about bringing Manchester together. All our community events are <strong>free to attend</strong> — organised for the people, by the people. Get out, meet new faces and actually do something.
+                    We're not just here for services. KYNECTED is about bringing Manchester together. All our community events are <strong>free to attend</strong>, organised for the people of Manchester. Get out, meet new faces and actually do something.
                 </p>
             </div>
 
             <div class="events-grid mt-5">
-
                 <div class="event-card fade-in">
                     <div class="event-card-icon"><i class="fas fa-running" aria-hidden="true"></i></div>
                     <h3 class="event-card-title">Outdoor Fitness</h3>
-                    <p class="event-card-desc">Group 5K runs and organised hikes in and around Greater Manchester. All paces welcome, all levels covered. Free, outdoors, good company.</p>
+                    <p class="event-card-desc">Group 5K runs and organised hikes in and around Greater Manchester. All paces welcome, all levels covered.</p>
                     <span class="event-free-tag">Free</span>
                 </div>
 
                 <div class="event-card fade-in">
                     <div class="event-card-icon"><i class="fas fa-store" aria-hidden="true"></i></div>
                     <h3 class="event-card-title">Bonanza</h3>
-                    <p class="event-card-desc">Community market days with local sellers, food, music and kids relay races. A proper day out worth showing up for.</p>
+                    <p class="event-card-desc">Community market days with local sellers, food, music and kids relay races. A proper day out for the whole family.</p>
                     <span class="event-free-tag">Free</span>
                 </div>
 
@@ -672,31 +627,30 @@
                 <div class="event-card fade-in">
                     <div class="event-card-icon"><i class="fas fa-gamepad" aria-hidden="true"></i></div>
                     <h3 class="event-card-title">Kynected Gaming Shows</h3>
-                    <p class="event-card-desc">Community gaming events, tournaments and shows. Whether you play casually or competitively, there's a space for you.</p>
+                    <p class="event-card-desc">Community gaming events, tournaments and shows. Casual or competitive, there's a space for everyone.</p>
                     <span class="event-free-tag">Free</span>
                 </div>
 
                 <div class="event-card fade-in">
                     <div class="event-card-icon"><i class="fas fa-futbol" aria-hidden="true"></i></div>
                     <h3 class="event-card-title">Multi-Sport Tournaments</h3>
-                    <p class="event-card-desc">5-a-side and 11-a-side football, basketball and more. Sign up solo or bring your team. Competitive but community-spirited.</p>
+                    <p class="event-card-desc">5-a-side and 11-a-side football, basketball and more. Sign up solo or bring your crew. Competitive but community-spirited.</p>
                     <span class="event-free-tag">Free</span>
                 </div>
-
             </div>
 
-            <!-- REGISTER INTEREST FORM -->
+            <!-- REGISTER INTEREST -->
             <div class="events-interest-wrapper mt-5 fade-in" id="events-interest">
                 <div class="events-interest-inner">
                     <h3 class="events-interest-title">Register Your Interest</h3>
-                    <p class="events-interest-sub">Tell us which events you want to see. We'll add you to the mailing list and keep you updated when dates are confirmed.</p>
+                    <p class="events-interest-sub">Tell us which events you'd like. We'll add you to our mailing list and keep you updated when dates are confirmed.</p>
 
-                    <form id="events-form" class="events-interest-form">
+                    <div id="events-form" class="events-interest-form">
                         <div class="mb-3">
-                            <input type="text" name="name" id="evtName" placeholder="Your Name" required class="form-control" autocomplete="name">
+                            <input type="text" id="evtName" placeholder="Your Name" required class="form-control" autocomplete="name">
                         </div>
                         <div class="mb-3">
-                            <input type="email" name="email" id="evtEmail" placeholder="Your Email Address" required class="form-control" autocomplete="email">
+                            <input type="email" id="evtEmail" placeholder="Your Email Address" required class="form-control" autocomplete="email">
                         </div>
 
                         <p class="events-checkbox-label">Which events are you interested in?</p>
@@ -724,7 +678,7 @@
                             <label class="event-checkbox-item">
                                 <input type="checkbox" name="event_sport" value="Multi-Sport Tournament">
                                 <span class="event-checkbox-custom"></span>
-                                <span class="event-checkbox-text"><i class="fas fa-futbol"></i> Multi-Sport Tournament</span>
+                                <span class="event-checkbox-text"><i class="fas fa-futbol"></i> Multi-Sport</span>
                             </label>
                             <label class="event-checkbox-item">
                                 <input type="checkbox" name="event_other_check" value="Other" id="evt-other-check">
@@ -734,20 +688,20 @@
                         </div>
 
                         <div class="mb-3 mt-3" id="other-event-field" style="display:none;">
-                            <input type="text" name="event_other_detail" placeholder="Tell us what kind of event you'd like to see" class="form-control">
+                            <input type="text" id="evtOtherDetail" placeholder="Tell us what kind of event you'd like to see" class="form-control">
                         </div>
 
                         <div class="mb-3 events-consent">
                             <label class="event-checkbox-item">
-                                <input type="checkbox" name="mailing_consent" value="yes" required>
+                                <input type="checkbox" id="mailing-consent" required>
                                 <span class="event-checkbox-custom"></span>
                                 <span class="event-checkbox-text">I'm happy to receive event updates from KYNECTED by email. We won't share your address or send spam.</span>
                             </label>
                         </div>
 
-                        <button type="submit" class="btn-action-oval w-100">Register Interest</button>
+                        <button type="button" id="evtSubmitBtn" class="btn-action-oval w-100">Register Interest</button>
                         <div id="events-form-status" class="events-form-status" aria-live="polite"></div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -800,7 +754,6 @@
                                 <option value="personal-shopper">Personal Shopper &amp; Collection</option>
                                 <option value="advice">Advice</option>
                                 <option value="service-broker">Service Broker</option>
-                                <option value="advertising">Advertising &amp; Promotion</option>
                                 <option value="cinematography">Cinematography &amp; Photography</option>
                                 <option value="website-design">Website Design</option>
                                 <option value="other">Other</option>
