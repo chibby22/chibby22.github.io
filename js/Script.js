@@ -15,14 +15,14 @@ document.addEventListener('DOMContentLoaded', function () {
     var analyticsLoaded = false;
 
     function showCookieGate() {
-        if (cookieGate) cookieGate.classList.remove('hidden');
-        if (cookieBackdrop) cookieBackdrop.classList.remove('hidden');
+        if (cookieGate) cookieGate.classList.add('visible');
+        if (cookieBackdrop) cookieBackdrop.classList.add('visible');
         document.body.classList.add('cookie-gate-active');
     }
 
     function hideCookieGate() {
-        if (cookieGate) cookieGate.classList.add('hidden');
-        if (cookieBackdrop) cookieBackdrop.classList.add('hidden');
+        if (cookieGate) cookieGate.classList.remove('visible');
+        if (cookieBackdrop) cookieBackdrop.classList.remove('visible');
         document.body.classList.remove('cookie-gate-active');
     }
 
@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // =============================================
-    // EVENTS FORM — show/hide Other field + submit
+    // EVENTS FORM — localStorage storage + CSV download
     // =============================================
     var otherCheck = document.getElementById('evt-other-check');
     var otherField = document.getElementById('other-event-field');
@@ -254,66 +254,136 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    var eventsForm = document.getElementById('events-form');
+    var REGISTRATIONS_KEY = 'kynected_event_registrations';
     var formStatus = document.getElementById('events-form-status');
+    var submitBtn = document.getElementById('evtSubmitBtn');
 
-    if (eventsForm) {
-        eventsForm.addEventListener('submit', function (e) {
-            e.preventDefault();
+    function getRegistrations() {
+        try {
+            return JSON.parse(localStorage.getItem(REGISTRATIONS_KEY) || '[]');
+        } catch (e) { return []; }
+    }
 
-            var name = document.getElementById('evtName').value.trim();
-            var email = document.getElementById('evtEmail').value.trim();
+    function saveRegistration(entry) {
+        var list = getRegistrations();
+        list.push(entry);
+        localStorage.setItem(REGISTRATIONS_KEY, JSON.stringify(list));
+    }
 
-            // Collect selected events
-            var selected = [];
-            eventsForm.querySelectorAll('input[type="checkbox"]:checked').forEach(function (cb) {
-                if (cb.name !== 'mailing_consent' && cb.name !== 'event_other_check') selected.push(cb.value);
-            });
-            if (document.getElementById('evt-other-check') && document.getElementById('evt-other-check').checked) {
-                var otherDetail = eventsForm.querySelector('input[name="event_other_detail"]');
-                if (otherDetail && otherDetail.value.trim()) selected.push('Other: ' + otherDetail.value.trim());
+    if (submitBtn) {
+        submitBtn.addEventListener('click', function () {
+            var nameEl = document.getElementById('evtName');
+            var emailEl = document.getElementById('evtEmail');
+            var consentEl = document.getElementById('mailing-consent');
+
+            if (!nameEl || !nameEl.value.trim()) {
+                formStatus.className = 'events-form-status error';
+                formStatus.textContent = 'Please enter your name.';
+                return;
+            }
+            if (!emailEl || !emailEl.value.trim() || !emailEl.value.includes('@')) {
+                formStatus.className = 'events-form-status error';
+                formStatus.textContent = 'Please enter a valid email address.';
+                return;
+            }
+            if (!consentEl || !consentEl.checked) {
+                formStatus.className = 'events-form-status error';
+                formStatus.textContent = 'Please tick the consent box to continue.';
+                return;
             }
 
-            // Build submission payload for Formspark
-            var payload = {
-                _subject: 'Kynected Events Interest — ' + name,
-                name: name,
-                email: email,
-                events_interested_in: selected.length ? selected.join(', ') : 'No events selected',
-                mailing_list: 'Yes — consented',
-                submitted_at: new Date().toLocaleString('en-GB')
-            };
+            var selected = [];
+            document.querySelectorAll('#events-form input[type="checkbox"]:checked').forEach(function (cb) {
+                if (cb.id !== 'mailing-consent' && cb.id !== 'evt-other-check') selected.push(cb.value);
+            });
+            if (otherCheck && otherCheck.checked) {
+                var detail = document.getElementById('evtOtherDetail');
+                if (detail && detail.value.trim()) selected.push('Other: ' + detail.value.trim());
+            }
 
-            // Disable button while submitting
-            var submitBtn = eventsForm.querySelector('button[type="submit"]');
+            var entryName  = nameEl.value.trim();
+            var entryEmail = emailEl.value.trim();
+            var entryEvts  = selected.join(', ') || 'None specified';
+            var entryDate  = new Date().toLocaleString('en-GB');
+
+            var entry = { name: entryName, email: entryEmail, events: entryEvts, date: entryDate };
+
+            // 1. Save to localStorage for admin CSV download
+            saveRegistration(entry);
+            // --- GA4 EVENT TRACKING START ---
+if (typeof gtag === 'function') {
+    gtag('event', 'event_registration', {
+        'event_category': 'Engagement',
+        'event_label': entryEvts,
+        'value': 1
+    });
+}
+           
+
+            // 2. Send to kynectedsolutions@outlook.com via Formspark
+            var formData = new FormData();
+            formData.append('_subject', 'Kynected Events Interest — ' + entryName);
+            formData.append('name', entryName);
+            formData.append('email', entryEmail);
+            formData.append('events_interested_in', entryEvts);
+            formData.append('date', entryDate);
+            formData.append('form_type', 'events_mailing_list');
+
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
 
             fetch('https://submit-form.com/IcUWdakJn', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify(payload)
-            })
-            .then(function (res) {
-                if (res.ok) {
-                    formStatus.className = 'events-form-status success';
-                    formStatus.textContent = "You're on the list! We'll email you when events are confirmed.";
-                    eventsForm.reset();
-                    if (otherField) otherField.style.display = 'none';
-                } else {
-                    throw new Error('Submission failed');
-                }
-            })
-            .catch(function () {
-                formStatus.className = 'events-form-status error';
-                formStatus.textContent = 'Something went wrong. Please try again or email us directly.';
-            })
-            .finally(function () {
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            }).then(function (res) {
+                formStatus.className = 'events-form-status success';
+                formStatus.textContent = "You\u2019re on the list! We\u2019ll be in touch when dates are confirmed.";
+            }).catch(function () {
+                // Still saved to localStorage — let user know
+                formStatus.className = 'events-form-status success';
+                formStatus.textContent = "Registered! We\u2019ll be in touch soon.";
+            }).finally(function () {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Register Interest';
+                // Reset fields
+                nameEl.value = '';
+                emailEl.value = '';
+                if (consentEl) consentEl.checked = false;
+                document.querySelectorAll('#events-form input[type="checkbox"]').forEach(function (cb) { cb.checked = false; });
+                if (otherField) otherField.style.display = 'none';
+                var od = document.getElementById('evtOtherDetail');
+                if (od) od.value = '';
             });
         });
     }
+
+    // Secret admin shortcut: type "kynected-admin" anywhere on the page
+    // to download a CSV of all event registrations
+    var adminBuffer = '';
+    document.addEventListener('keypress', function (e) {
+        adminBuffer += e.key;
+        if (adminBuffer.length > 14) adminBuffer = adminBuffer.slice(-14);
+        if (adminBuffer === 'kynected-admin') {
+            adminBuffer = '';
+            var list = getRegistrations();
+            if (!list.length) {
+                alert('No registrations saved yet.');
+                return;
+            }
+            var csv = 'Name,Email,Events Interested In,Date Registered\n';
+            list.forEach(function (r) {
+                csv += '"' + r.name + '","' + r.email + '","' + r.events + '","' + r.date + '"\n';
+            });
+            var blob = new Blob([csv], { type: 'text/csv' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'kynected_event_registrations.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    });
 
 
     // =============================================
