@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function () {
 if (typeof gtag === 'function') {
     gtag('event', 'event_registration', {
         'event_category': 'Engagement',
-        'event_label': entryEvts,
+        'event_interest': entryEvts,
         'value': 1
     });
 }
