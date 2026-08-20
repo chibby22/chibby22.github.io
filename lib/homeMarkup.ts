@@ -1,0 +1,667 @@
+export const homeMarkup = String.raw`
+
+    <!-- COOKIE CONSENT GATE -->
+    <div id="cookie-gate" class="cookie-gate" role="dialog" aria-modal="true" aria-labelledby="cookie-gate-title">
+        <div class="cookie-gate-inner">
+            <div class="cookie-gate-header">
+                <img src="/images/Kynected_trans_logo.png" alt="KYNECTED" class="cookie-gate-logo">
+                <h2 id="cookie-gate-title">We use cookies</h2>
+            </div>
+            <p class="cookie-gate-text">We use <strong>essential cookies</strong> to make the site work, and <strong>optional analytics cookies</strong> to understand how it's used.</p>
+            <div class="cookie-toggle-row">
+                <div class="cookie-toggle-item">
+                    <span class="cookie-toggle-label"><i class="fas fa-lock"></i>Essential cookies<span class="cookie-always-on">Always on</span></span>
+                    <p class="cookie-toggle-desc">Required for the site to function. Cannot be disabled.</p>
+                </div>
+                <div class="cookie-toggle-item">
+                    <span class="cookie-toggle-label"><i class="fas fa-chart-bar"></i>Analytics cookies</span>
+                    <p class="cookie-toggle-desc">Help us understand how visitors use the site. No personal data is sold.</p>
+                    <label class="cookie-switch" aria-label="Toggle analytics cookies">
+                        <input type="checkbox" id="analytics-toggle" checked>
+                        <span class="cookie-slider"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="cookie-gate-buttons">
+                <button class="cookie-btn cookie-btn-accept" id="cookie-accept-all">Accept all</button>
+                <button class="cookie-btn cookie-btn-custom" id="cookie-save-custom">Save my choices</button>
+                <button class="cookie-btn cookie-btn-essential" id="cookie-essential-only">Essential only</button>
+            </div>
+            <p class="cookie-gate-footer">Change preferences any time via the cookie button in the footer.</p>
+        </div>
+    </div>
+    <div id="cookie-backdrop" class="cookie-backdrop"></div>
+
+    <header class="site-header">
+        <a href="#home" class="header-logo"><img src="/images/Kynected_trans_logo.png" alt="KYNECTED logo" class="logo" width="100" height="auto"></a>
+        <div class="header-brand text-center">
+            <a href="#home" class="brand-link"><h1 class="brand-name-header">KYNECTED</h1></a>
+        </div>
+        <nav class="header-nav d-none d-md-flex" aria-label="Main navigation">
+            <ul class="nav-list list-unstyled m-0 p-0">
+                <li class="ms-2"><a href="#home">Home</a></li>
+                <li class="ms-2"><a href="#about">About</a></li>
+                <li class="ms-2"><a href="#services">Services</a></li>
+                <li class="ms-2"><a href="#events">Events</a></li>
+                <li class="ms-2"><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="navbar-toggler d-md-none" type="button" aria-label="Toggle navigation" aria-expanded="false">
+            <span class="toggler-icon"></span><span class="toggler-icon"></span><span class="toggler-icon"></span>
+        </button>
+        <div class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#events">Events</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="home" class="hero-section" aria-label="Hero">
+        <canvas id="particle-canvas" aria-hidden="true"></canvas>
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center order-md-2">
+                    <img src="/images/3dk1_trans.png" alt="3D Kynected logo, professional services Manchester" class="img-fluid hero-image" loading="eager">
+                </div>
+                <div class="col-md-6 hero-text-content order-md-1">
+                    <h2 class="hero-title-italic" id="typing-text" aria-label="KYNECTED"></h2>
+                    <p class="hero-tagline"><span id="cycling-tagline"></span></p>
+                    <div class="key-benefits mt-4">
+                        <div class="benefit-item"><i class="fas fa-clock" aria-hidden="true"></i><span>Save Time &amp; Hassle</span></div>
+                        <div class="benefit-item"><i class="fas fa-star" aria-hidden="true"></i><span>Expert &amp; Professional</span></div>
+                        <div class="benefit-item"><i class="fas fa-user-check" aria-hidden="true"></i><span>One Trusted Contact</span></div>
+                        <div class="benefit-item"><i class="fas fa-pound-sign" aria-hidden="true"></i><span>Prices from £15</span></div>
+                    </div>
+                    <div class="hero-buttons mt-4">
+                        <a href="#services" class="btn-action-oval">Our Services</a>
+                        <a href="#contact" class="btn-action-oval ms-3">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="about-section" aria-labelledby="about-heading">
+        <div class="about-full-wrapper fade-in">
+            <div class="about-text-center">
+                <h2 class="section-title-underline" id="about-heading">About Us</h2>
+                <p class="about-text">KYNECTED is your single point of contact for professional services across Manchester. Whether you need a reliable handyman, a thorough clean or a skilled technician, we find the right person for the job and save you the stress of searching.</p>
+                <p class="about-text">Where a service falls outside our direct expertise, our network of vetted professionals steps in. Every person we work with meets our quality standard. The goal is straightforward: the right professional, every time.</p>
+                <div class="social-icons mt-4 justify-content-center">
+                    <a href="https://www.facebook.com/share/1BMqi7Eixs/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/kynectedd/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@kynected" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="icon-grid-desktop" aria-hidden="true">
+                <a href="#services"><div class="service-icon-wrapper icon-pos-1"><div class="floating-icon"><i class="fas fa-tools"></i></div><span class="icon-tooltip">Handyman &amp; Repairs</span></div></a>
+                <a href="#services"><div class="service-icon-wrapper icon-pos-2"><div class="floating-icon"><i class="fas fa-couch"></i></div><span class="icon-tooltip">Furniture Assembly</span></div></a>
+                <a href="#services"><div class="service-icon-wrapper icon-pos-3"><div class="floating-icon"><i class="fas fa-laptop"></i></div><span class="icon-tooltip">Electronics Repair</span></div></a>
+                <a href="#cleaning"><div class="service-icon-wrapper icon-pos-4"><div class="floating-icon"><i class="fas fa-broom"></i></div><span class="icon-tooltip">Cleaning</span></div></a>
+                <a href="#services"><div class="service-icon-wrapper icon-pos-5"><div class="floating-icon"><i class="fas fa-shopping-basket"></i></div><span class="icon-tooltip">Personal Shopper</span></div></a>
+                <a href="#services"><div class="service-icon-wrapper icon-pos-6"><div class="floating-icon"><i class="fas fa-lightbulb"></i></div><span class="icon-tooltip">Advice</span></div></a>
+                <a href="#services"><div class="service-icon-wrapper icon-pos-7"><div class="floating-icon"><i class="fas fa-code"></i></div><span class="icon-tooltip">Website Designer</span></div></a>
+                <div class="background-bubble bubble-large-1"></div>
+                <div class="background-bubble bubble-medium-1"></div>
+                <div class="background-bubble bubble-small-1"></div>
+                <div class="background-bubble bubble-large-2"></div>
+                <div class="background-bubble bubble-medium-2"></div>
+                <div class="background-bubble bubble-small-2"></div>
+                <div class="background-bubble bubble-large-3"></div>
+                <div class="background-bubble bubble-medium-3"></div>
+                <div class="background-bubble bubble-offscreen-left"></div>
+                <div class="background-bubble bubble-offscreen-right"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES ACCORDION — Lifestyle first -->
+    <section id="services" class="py-5" aria-labelledby="services-heading">
+        <div class="container">
+            <h2 class="section-title-underline text-center fade-in" id="services-heading">Our Services</h2>
+            <p class="services-intro text-center mt-4 fade-in">Select a category to see what we offer.</p>
+            <div class="services-accordion mt-4" id="servicesAccordion">
+
+                <!-- LIFESTYLE — first -->
+                <div class="accordion-service-group fade-in">
+                    <button class="accordion-service-btn" aria-expanded="false" aria-controls="lifestyle-panel">
+                        <span class="accordion-btn-left"><i class="fas fa-concierge-bell" aria-hidden="true"></i>Lifestyle Services</span>
+                        <i class="fas fa-chevron-down accordion-arrow" aria-hidden="true"></i>
+                    </button>
+                    <div class="accordion-service-panel" id="lifestyle-panel" role="region" aria-label="Lifestyle services">
+                        <div class="row justify-content-center pt-3 pb-2">
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fas fa-broom service-icon" aria-hidden="true"></i>
+                                            <h3 class="service-title">Cleaning</h3>
+                                            <p class="flip-hint">Tap to learn more</p>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <h3 class="service-title">Cleaning</h3>
+                                            <p class="service-description">Thorough, reliable cleaning for homes, offices and Airbnbs across Manchester. We leave every space spotless, guaranteed.</p>
+                                            <a href="#cleaning" class="service-card-link">Find out more <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fas fa-concierge-bell service-icon" aria-hidden="true"></i>
+                                            <h3 class="service-title">Personal Concierge</h3>
+                                            <p class="flip-hint">Tap to learn more</p>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <h3 class="service-title">Personal Concierge</h3>
+                                            <p class="service-description">Errands, appointments and daily tasks managed for you. Whether it's a one-off or ongoing, we handle the details so you can focus on what matters.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fas fa-shopping-basket service-icon" aria-hidden="true"></i>
+                                            <h3 class="service-title">Personal Shopper &amp; Collection</h3>
+                                            <p class="flip-hint">Tap to learn more</p>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <h3 class="service-title">Personal Shopper &amp; Collection</h3>
+                                            <p class="service-description">We find what you need at the best price, pick up parcels and collect items bought through Facebook Marketplace across Manchester. No waiting in, no awkward trips.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HOME & REPAIR -->
+                <div class="accordion-service-group fade-in">
+                    <button class="accordion-service-btn" aria-expanded="false" aria-controls="home-repair-panel">
+                        <span class="accordion-btn-left"><i class="fas fa-hard-hat" aria-hidden="true"></i>Home &amp; Repair</span>
+                        <i class="fas fa-chevron-down accordion-arrow" aria-hidden="true"></i>
+                    </button>
+                    <div class="accordion-service-panel" id="home-repair-panel" role="region" aria-label="Home and Repair services">
+                        <div class="row justify-content-center pt-3 pb-2">
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fas fa-tools service-icon" aria-hidden="true"></i>
+                                            <h3 class="service-title">Handyman &amp; Repairs</h3>
+                                            <p class="flip-hint">Tap to learn more</p>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <h3 class="service-title">Handyman &amp; Repairs</h3>
+                                            <p class="service-description">Reliable handyman services across Manchester, from small fixes to general household repairs. No job too straightforward, no problem too awkward.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fas fa-couch service-icon" aria-hidden="true"></i>
+                                            <h3 class="service-title">Furniture Assembly</h3>
+                                            <p class="flip-hint">Tap to learn more</p>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <h3 class="service-title">Furniture Assembly</h3>
+                                            <p class="service-description">Expert flat-pack assembly across Manchester. We build quickly and correctly so you don't have to spend your weekend arguing with instructions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fas fa-laptop service-icon" aria-hidden="true"></i>
+                                            <h3 class="service-title">Electronics Repair &amp; Cleaning</h3>
+                                            <p class="flip-hint">Tap to learn more</p>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <h3 class="service-title">Electronics Repair &amp; Cleaning</h3>
+                                            <p class="service-description">Laptops, phones, PCs and PS5s repaired, reset or deep cleaned. If your device is slow, noisy or not working, we sort it.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CREATIVE -->
+                <div class="accordion-service-group fade-in">
+                    <button class="accordion-service-btn" aria-expanded="false" aria-controls="creative-panel">
+                        <span class="accordion-btn-left"><i class="fas fa-paint-brush" aria-hidden="true"></i>Creative Services</span>
+                        <i class="fas fa-chevron-down accordion-arrow" aria-hidden="true"></i>
+                    </button>
+                    <div class="accordion-service-panel" id="creative-panel" role="region" aria-label="Creative services">
+                        <div class="row justify-content-center pt-3 pb-2">
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fas fa-video service-icon" aria-hidden="true"></i>
+                                            <h3 class="service-title">Cinematography &amp; Photography</h3>
+                                            <p class="flip-hint">Tap to learn more</p>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <h3 class="service-title">Cinematography &amp; Photography</h3>
+                                            <p class="service-description">Professional photography and videography in Manchester for events, content creation and promotional material. We capture what matters.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fas fa-code service-icon" aria-hidden="true"></i>
+                                            <h3 class="service-title">Website Design</h3>
+                                            <p class="flip-hint">Tap to learn more</p>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <h3 class="service-title">Website Design</h3>
+                                            <p class="service-description">Modern, mobile-friendly websites built for your goals at a competitive price, with no technical headaches on your end.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <p class="other-services-note mt-5 text-center fade-in">Don't see what you need? Other services are available on request. Just <a href="#contact">get in touch</a>.</p>
+        </div>
+    </section>
+
+    <!-- CLEANING SPOTLIGHT -->
+    <section id="cleaning" class="py-5 cleaning-section" aria-labelledby="cleaning-heading">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 col-md-10 mx-auto fade-in">
+                    <span class="cleaning-label">Featured Service</span>
+                    <h2 class="section-title-underline mt-2" id="cleaning-heading">Professional Cleaning in Manchester</h2>
+                    <p class="about-text mt-4">A clean space changes how you feel in it. Whether it's your home, your office, your Airbnb or your electronics, we send trusted professionals who get the job done properly.</p>
+                    <p class="about-text">We work around your schedule. One-off, regular or urgent turnarounds, we cover it all.</p>
+
+                    <!-- Interactive service banner -->
+                    <div class="cleaning-type-tabs mt-4" role="tablist" aria-label="Cleaning types">
+                        <button class="cleaning-tab active" data-target="clean-domestic" role="tab" aria-selected="true">
+                            <i class="fas fa-home"></i><span>Home</span>
+                        </button>
+                        <button class="cleaning-tab" data-target="clean-airbnb" role="tab" aria-selected="false">
+                            <i class="fas fa-key"></i><span>Airbnb</span>
+                        </button>
+                        <button class="cleaning-tab" data-target="clean-office" role="tab" aria-selected="false">
+                            <i class="fas fa-building"></i><span>Office</span>
+                        </button>
+                        <button class="cleaning-tab" data-target="clean-deep" role="tab" aria-selected="false">
+                            <i class="fas fa-spray-can"></i><span>Deep Clean</span>
+                        </button>
+                        <button class="cleaning-tab" data-target="clean-electronics" role="tab" aria-selected="false">
+                            <i class="fas fa-gamepad"></i><span>Electronics</span>
+                        </button>
+                    </div>
+
+                    <div class="cleaning-tab-panels mt-3">
+                        <div class="cleaning-tab-panel active" id="clean-domestic" role="tabpanel">
+                            <div class="cleaning-panel-content">
+                                <i class="fas fa-home cleaning-panel-icon" aria-hidden="true"></i>
+                                <div>
+                                    <h4 class="cleaning-panel-title">Domestic Cleaning</h4>
+                                    <p class="cleaning-panel-text">Kitchens, bathrooms, bedrooms and living rooms. We leave your home spotless, every visit. Flexible weekly, fortnightly or one-off bookings.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cleaning-tab-panel" id="clean-airbnb" role="tabpanel">
+                            <div class="cleaning-panel-content">
+                                <i class="fas fa-key cleaning-panel-icon" aria-hidden="true"></i>
+                                <div>
+                                    <h4 class="cleaning-panel-title">Airbnb Cleaning</h4>
+                                    <p class="cleaning-panel-text">Quick, thorough turnaround cleans between guest stays. Your listing stays fresh, your reviews stay strong. We work around your booking calendar.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cleaning-tab-panel" id="clean-office" role="tabpanel">
+                            <div class="cleaning-panel-content">
+                                <i class="fas fa-building cleaning-panel-icon" aria-hidden="true"></i>
+                                <div>
+                                    <h4 class="cleaning-panel-title">Office Cleaning</h4>
+                                    <p class="cleaning-panel-text">A clean workspace helps your team focus. We handle it regularly so you don't have to think about it, done before your team arrives or after they leave.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cleaning-tab-panel" id="clean-deep" role="tabpanel">
+                            <div class="cleaning-panel-content">
+                                <i class="fas fa-spray-can cleaning-panel-icon" aria-hidden="true"></i>
+                                <div>
+                                    <h4 class="cleaning-panel-title">Deep Cleaning</h4>
+                                    <p class="cleaning-panel-text">Moving in, moving out or long overdue. We get into every corner, every surface, every shelf. Nothing is left behind.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cleaning-tab-panel" id="clean-electronics" role="tabpanel">
+                            <div class="cleaning-panel-content">
+                                <i class="fas fa-gamepad cleaning-panel-icon" aria-hidden="true"></i>
+                                <div>
+                                    <h4 class="cleaning-panel-title">Electronics Cleaning</h4>
+                                    <p class="cleaning-panel-text">PS5, PC, laptop and gaming setup cleaning. We remove the dust and buildup that slows your device down and causes overheating.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#contact" class="btn-action-oval mt-4 d-inline-block">Book a Clean</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GUARANTEE -->
+    <section id="guarantee" class="py-4 text-center" aria-label="Customer satisfaction guarantee">
+        <div class="container fade-in">
+            <h3 class="guarantee-text"><i class="fas fa-check-circle" aria-hidden="true"></i> Customer Satisfaction Guaranteed</h3>
+        </div>
+    </section>
+
+    <!-- REVIEWS — inline strip -->
+    <section id="reviews" class="py-5 reviews-section" aria-labelledby="reviews-heading">
+        <div class="container">
+            <h2 class="section-title-underline text-center fade-in" id="reviews-heading">What Our Customers Say</h2>
+            <p class="text-center mt-3 mb-5 fade-in reviews-sub">Real feedback from people across Manchester.</p>
+
+            <div class="reviews-strip fade-in">
+
+                <div class="review-strip-item">
+                    <div class="review-strip-stars" aria-label="5 stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-strip-text">"Honestly wasn't expecting it to be this good. Booked a last minute clean and my flat was spotless within a couple of hours. The lad who came was sound, got on with it no drama. Will definitely use again."</p>
+                    <div class="review-strip-author">
+                        <div class="review-strip-avatar">S</div>
+                        <div class="review-strip-meta">
+                            <span class="review-strip-name">Sarah M.</span>
+                            <span class="review-strip-loc">Manchester</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-strip-divider" aria-hidden="true"></div>
+
+                <div class="review-strip-item">
+                    <div class="review-strip-stars" aria-label="4.5 stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="review-strip-text">"Had two IKEA wardrobes sitting in boxes for about three weeks because I kept putting it off. Kynected came over and knocked both out in under four hours. Wish I'd called sooner to be honest."</p>
+                    <div class="review-strip-author">
+                        <div class="review-strip-avatar">J</div>
+                        <div class="review-strip-meta">
+                            <span class="review-strip-name">James O.</span>
+                            <span class="review-strip-loc">Salford</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-strip-divider" aria-hidden="true"></div>
+
+                <div class="review-strip-item">
+                    <div class="review-strip-stars" aria-label="5 stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-strip-text">"Fast and reliable. I use them to clean my apartments. Consistent every time."</p>
+                    <div class="review-strip-author">
+                        <div class="review-strip-avatar">R</div>
+                        <div class="review-strip-meta">
+                            <span class="review-strip-name">Rachel K.</span>
+                            <span class="review-strip-loc">Didsbury</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-strip-divider" aria-hidden="true"></div>
+
+                <div class="review-strip-item">
+                    <div class="review-strip-stars" aria-label="5 stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-strip-text">"Laptop was completely dead, wouldn't even boot. They diagnosed and fixed it in a day. Impressed."</p>
+                    <div class="review-strip-author">
+                        <div class="review-strip-avatar">A</div>
+                        <div class="review-strip-meta">
+                            <span class="review-strip-name">Amara T.</span>
+                            <span class="review-strip-loc">Wythenshawe</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-strip-divider" aria-hidden="true"></div>
+
+                <div class="review-strip-item">
+                    <div class="review-strip-stars" aria-label="4 stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <p class="review-strip-text">"My PS5 was overheating and sounding like a jet engine. Got it cleaned and it's running quiet again. Proper job, reasonably priced."</p>
+                    <div class="review-strip-author">
+                        <div class="review-strip-avatar">T</div>
+                        <div class="review-strip-meta">
+                            <span class="review-strip-name">Tyler B.</span>
+                            <span class="review-strip-loc">Stretford</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center mt-4 fade-in">
+                <p class="review-cta-text">Had a good experience? <a href="#contact" class="review-cta-link">Send us a message</a> and let us know.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- KYNECTED EVENTS -->
+    <section id="events" class="py-5 events-section" aria-labelledby="events-heading">
+        <div class="container">
+            <div class="events-header fade-in">
+                <span class="cleaning-label">Community</span>
+                <h2 class="section-title-underline mt-2" id="events-heading">Kynected Events</h2>
+                <p class="about-text mt-4 events-intro-text">
+                    We're not just here for services. KYNECTED is about bringing Manchester together. All our community events are <strong>free to attend</strong>, organised for the people of Manchester. Get out, meet new faces and actually do something.
+                </p>
+            </div>
+
+            <div class="events-grid mt-5">
+                <div class="event-card fade-in">
+                    <div class="event-card-icon"><i class="fas fa-running" aria-hidden="true"></i></div>
+                    <h3 class="event-card-title">Outdoor Fitness</h3>
+                    <p class="event-card-desc">Group 5K runs and organised hikes in and around Greater Manchester. All paces welcome, all levels covered.</p>
+                    <span class="event-free-tag">Free</span>
+                </div>
+
+                <div class="event-card fade-in">
+                    <div class="event-card-icon"><i class="fas fa-store" aria-hidden="true"></i></div>
+                    <h3 class="event-card-title">Bonanza</h3>
+                    <p class="event-card-desc">Community market days with local sellers, food, music and kids relay races. A proper day out for the whole family.</p>
+                    <span class="event-free-tag">Free</span>
+                </div>
+
+                <div class="event-card fade-in">
+                    <div class="event-card-icon"><i class="fas fa-heart" aria-hidden="true"></i></div>
+                    <h3 class="event-card-title">Speed Dating</h3>
+                    <p class="event-card-desc">Properly organised speed dating nights in Manchester. No apps, no ghosting. Just real conversations in a relaxed setting.</p>
+                    <span class="event-free-tag">Free</span>
+                </div>
+
+                <div class="event-card fade-in">
+                    <div class="event-card-icon"><i class="fas fa-gamepad" aria-hidden="true"></i></div>
+                    <h3 class="event-card-title">Kynected Gaming Shows</h3>
+                    <p class="event-card-desc">Community gaming events, tournaments and shows. Casual or competitive, there's a space for everyone.</p>
+                    <span class="event-free-tag">Free</span>
+                </div>
+
+                <div class="event-card fade-in">
+                    <div class="event-card-icon"><i class="fas fa-futbol" aria-hidden="true"></i></div>
+                    <h3 class="event-card-title">Multi-Sport Tournaments</h3>
+                    <p class="event-card-desc">5-a-side and 11-a-side football, basketball and more. Sign up solo or bring your crew. Competitive but community-spirited.</p>
+                    <span class="event-free-tag">Free</span>
+                </div>
+            </div>
+
+            <!-- REGISTER INTEREST -->
+            <div class="events-interest-wrapper mt-5 fade-in" id="events-interest">
+                <div class="events-interest-inner">
+                    <h3 class="events-interest-title">Register Your Interest</h3>
+                    <p class="events-interest-sub">Tell us which events you'd like. We'll add you to our mailing list and keep you updated when dates are confirmed.</p>
+
+                    <div id="events-form" class="events-interest-form">
+                        <div class="mb-3">
+                            <input type="text" id="evtName" placeholder="Your Name" required class="form-control" autocomplete="name">
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" id="evtEmail" placeholder="Your Email Address" required class="form-control" autocomplete="email">
+                        </div>
+
+                        <p class="events-checkbox-label">Which events are you interested in?</p>
+                        <div class="events-checkbox-grid">
+                            <label class="event-checkbox-item">
+                                <input type="checkbox" name="event_outdoor" value="Outdoor Fitness (5K / Hike)">
+                                <span class="event-checkbox-custom"></span>
+                                <span class="event-checkbox-text"><i class="fas fa-running"></i> Outdoor Fitness</span>
+                            </label>
+                            <label class="event-checkbox-item">
+                                <input type="checkbox" name="event_bonanza" value="Bonanza">
+                                <span class="event-checkbox-custom"></span>
+                                <span class="event-checkbox-text"><i class="fas fa-store"></i> Bonanza</span>
+                            </label>
+                            <label class="event-checkbox-item">
+                                <input type="checkbox" name="event_speed_dating" value="Speed Dating">
+                                <span class="event-checkbox-custom"></span>
+                                <span class="event-checkbox-text"><i class="fas fa-heart"></i> Speed Dating</span>
+                            </label>
+                            <label class="event-checkbox-item">
+                                <input type="checkbox" name="event_gaming" value="Gaming Show">
+                                <span class="event-checkbox-custom"></span>
+                                <span class="event-checkbox-text"><i class="fas fa-gamepad"></i> Gaming Show</span>
+                            </label>
+                            <label class="event-checkbox-item">
+                                <input type="checkbox" name="event_sport" value="Multi-Sport Tournament">
+                                <span class="event-checkbox-custom"></span>
+                                <span class="event-checkbox-text"><i class="fas fa-futbol"></i> Multi-Sport</span>
+                            </label>
+                            <label class="event-checkbox-item">
+                                <input type="checkbox" name="event_other_check" value="Other" id="evt-other-check">
+                                <span class="event-checkbox-custom"></span>
+                                <span class="event-checkbox-text"><i class="fas fa-plus-circle"></i> Other</span>
+                            </label>
+                        </div>
+
+                        <div class="mb-3 mt-3" id="other-event-field" style="display:none;">
+                            <input type="text" id="evtOtherDetail" placeholder="Tell us what kind of event you'd like to see" class="form-control">
+                        </div>
+
+                        <div class="mb-3 events-consent">
+                            <label class="event-checkbox-item">
+                                <input type="checkbox" id="mailing-consent" required>
+                                <span class="event-checkbox-custom"></span>
+                                <span class="event-checkbox-text">I'm happy to receive event updates from KYNECTED by email. We won't share your address or send spam.</span>
+                            </label>
+                        </div>
+
+                        <input type="text" id="evtWebsite" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"><div id="events-recaptcha" class="mb-3"></div><button type="button" id="evtSubmitBtn" class="btn-action-oval w-100">Register Interest</button>
+                        <div id="events-form-status" class="events-form-status" aria-live="polite"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOUNDER -->
+    <section id="founder" class="py-5 founder-page-section" aria-labelledby="founder-heading">
+        <div class="container">
+            <div class="row align-items-center founder-section fade-in">
+                <div class="col-md-3 text-center">
+                    <img src="/images/IMG_0779.png" alt="Promise O., Founder of KYNECTED" class="founder-photo" loading="lazy" width="150" height="150">
+                </div>
+                <div class="col-md-9">
+                    <h3 class="founder-title" id="founder-heading">Our Founder</h3>
+                    <p class="about-text">KYNECTED was founded by Promise O., an Electrical and Electronic Engineer with a passion for problem solving and connecting people with the right help. He built the business on a straightforward idea: finding a trustworthy professional in Manchester shouldn't be complicated. His hands-on approach and commitment to quality runs through every service we offer.</p>
+                </div>
+                <div class="background-bubble founder-bubble-1"></div>
+                <div class="background-bubble founder-bubble-2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-5" aria-labelledby="contact-heading">
+        <div class="container">
+            <h2 class="section-title-underline text-center fade-in" id="contact-heading">Contact Us</h2>
+            <div class="row mt-5">
+                <div class="col-lg-5 fade-in">
+                    <ul class="contact-info list-unstyled">
+                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Manchester</li>
+                        <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:kynectedsolutions@outlook.com">kynectedsolutions@outlook.com</a></li>
+                        <li><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+447440034201">07440 034201</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-7 mt-4 mt-lg-0 fade-in">
+                    <form id="contact-form" class="contact-form" novalidate>
+                        <div class="mb-3"><input type="text" name="name" placeholder="Your Name" required class="form-control" autocomplete="name"></div>
+                        <div class="mb-3"><input type="email" name="email" placeholder="Your Email" required class="form-control" autocomplete="email"></div>
+                        <div class="mb-3">
+                            <select name="service" class="form-control">
+                                <option value="" disabled selected>Service you're interested in (optional)</option>
+                                <option value="cleaning">Cleaning</option>
+                                <option value="airbnb-cleaning">Airbnb Cleaning</option>
+                                <option value="electronics-cleaning">Electronics Cleaning (PS5, PC, Laptop)</option>
+                                <option value="laptop-repair">Laptop Repair / Reset</option>
+                                <option value="phone-repair">Phone Repair</option>
+                                <option value="handyman">Handyman &amp; Repairs</option>
+                                <option value="furniture-assembly">Furniture Assembly</option>
+                                <option value="concierge">Personal Concierge</option>
+                                <option value="personal-shopper">Personal Shopper &amp; Collection</option>
+                                <option value="advice">Advice</option>
+                                <option value="service-broker">Service Broker</option>
+                                <option value="cinematography">Cinematography &amp; Photography</option>
+                                <option value="website-design">Website Design</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3"><textarea name="message" placeholder="Your Message" rows="5" required class="form-control"></textarea></div>
+                        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"><div id="contact-recaptcha" class="mb-3"></div>
+                        <button type="submit" id="contact-submit" class="btn-action-oval">Send Message</button><div id="contact-form-status" class="events-form-status" aria-live="polite"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer-new">
+        <div class="container">
+            <div class="social-icons-footer mb-3">
+                <a href="https://www.facebook.com/share/1BMqi7Eixs/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/kynectedd/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@kynected" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p class="mb-1">&copy; <span id="current-year"></span> KYNECTED. All Rights Reserved.</p>
+            <p class="footer-tagline">Professional Services &amp; Free Community Events in Manchester</p>
+            <button class="cookie-reopen-btn" id="cookie-reopen" aria-label="Review cookie preferences">
+                <i class="fas fa-cookie-bite"></i> Cookie Preferences
+            </button>
+        </div>
+    </footer>
+
+    
+`;
