@@ -8,6 +8,7 @@ declare global {
     grecaptcha?: {
       render: (container: string | HTMLElement, options: Record<string, unknown>) => number;
       getResponse: (widgetId?: number) => string;
+      execute: (widgetId?: number) => void;
       reset: (widgetId?: number) => void;
     };
     dataLayer?: unknown[];
@@ -312,10 +313,6 @@ export default function SiteClient() {
 // only runs once the full reCAPTCHA library is ready.
 
 const renderCaptcha = () => {
-  // Make sure:
-  // 1. We actually have a site key.
-  // 2. Google's API exists.
-  // 3. render() is fully available.
   if (
     !SITE_KEY ||
     !window.grecaptcha ||
@@ -327,16 +324,27 @@ const renderCaptcha = () => {
   const contact = document.getElementById("contact-recaptcha");
   const events = document.getElementById("events-recaptcha");
 
-  // Only create each widget once.
   if (contact && contactWidget === undefined) {
     contactWidget = window.grecaptcha.render(contact, {
       sitekey: SITE_KEY,
+      size: "invisible",
+      badge: "bottomright",
+      callback: () => {
+        const form = document.getElementById("contact-form") as HTMLFormElement | null;
+        form?.requestSubmit();
+      }
     });
   }
 
   if (events && eventsWidget === undefined) {
     eventsWidget = window.grecaptcha.render(events, {
       sitekey: SITE_KEY,
+      size: "invisible",
+      badge: "bottomright",
+      callback: () => {
+        const button = document.getElementById("evtSubmitBtn") as HTMLButtonElement | null;
+        button?.click();
+      }
     });
   }
 };
@@ -414,62 +422,81 @@ if (SITE_KEY) {
         if (detail) selected.push(`Other: ${detail}`);
       }
 
-      // Only ask Google for a response after
-// an actual reCAPTCHA widget exists.
-const recaptchaToken =
-  eventsWidget !== undefined &&
-  window.grecaptcha &&
-  typeof window.grecaptcha.getResponse === "function"
-    ? window.grecaptcha.getResponse(eventsWidget)
-    : "";
-      if (!recaptchaToken) {
-        setStatus(status, "error", "Please complete the captcha.");
+      if (!window.grecaptcha || typeof window.grecaptcha.execute !== "function") {
+        setStatus(status, "error", "Captcha is not available right now.");
         return;
       }
 
-      if (eventSubmit) {
-        eventSubmit.disabled = true;
-        eventSubmit.textContent = "Sending...";
+      const submitWithToken = async () => {
+        const recaptchaToken =
+          eventsWidget !== undefined &&
+          window.grecaptcha &&
+          typeof window.grecaptcha.getResponse === "function"
+            ? window.grecaptcha.getResponse(eventsWidget)
+            : "";
+
+        if (!recaptchaToken) {
+          setStatus(status, "error", "Please complete the captcha.");
+          return;
+        }
+
+        if (eventSubmit) {
+          eventSubmit.disabled = true;
+          eventSubmit.textContent = "Sending...";
+        }
+
+        try {
+          const res = await fetch("/api/events", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name,
+              email,
+              events: selected.join(", ") || "None specified",
+              consent,
+              website,
+              recaptchaToken
+            })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || "Unable to register.");
+          setStatus(status, "success", "You’re on the list! We’ll be in touch when dates are confirmed.");
+          (document.getElementById("evtName") as HTMLInputElement).value = "";
+          (document.getElementById("evtEmail") as HTMLInputElement).value = "";
+          document.querySelectorAll<HTMLInputElement>('#events-form input[type="checkbox"]').forEach((cb) => {
+            cb.checked = false;
+          });
+          if (otherField) otherField.style.display = "none";
+          const detail = document.getElementById("evtOtherDetail") as HTMLInputElement | null;
+          if (detail) detail.value = "";
+          window.grecaptcha?.reset(eventsWidget);
+          window.gtag?.("event", "event_registration", {
+            event_category: "Engagement",
+            event_interest: selected.join(", "),
+            value: 1
+          });
+        } catch (error) {
+          setStatus(status, "error", error instanceof Error ? error.message : "Unable to register right now.");
+        } finally {
+          if (eventSubmit) {
+            eventSubmit.disabled = false;
+            eventSubmit.textContent = "Register Interest";
+          }
+        }
+      };
+
+      if (eventsWidget !== undefined) {
+        window.grecaptcha.execute(eventsWidget);
+        setTimeout(() => {
+          if (window.grecaptcha && typeof window.grecaptcha.getResponse === "function") {
+            const token = window.grecaptcha.getResponse(eventsWidget);
+            if (token) void submitWithToken();
+          }
+        }, 100);
+        return;
       }
 
-      try {
-        const res = await fetch("/api/events", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name,
-            email,
-            events: selected.join(", ") || "None specified",
-            consent,
-            website,
-            recaptchaToken
-          })
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "Unable to register.");
-        setStatus(status, "success", "You’re on the list! We’ll be in touch when dates are confirmed.");
-        (document.getElementById("evtName") as HTMLInputElement).value = "";
-        (document.getElementById("evtEmail") as HTMLInputElement).value = "";
-        document.querySelectorAll<HTMLInputElement>('#events-form input[type="checkbox"]').forEach((cb) => {
-          cb.checked = false;
-        });
-        if (otherField) otherField.style.display = "none";
-        const detail = document.getElementById("evtOtherDetail") as HTMLInputElement | null;
-        if (detail) detail.value = "";
-        window.grecaptcha?.reset(eventsWidget);
-        window.gtag?.("event", "event_registration", {
-          event_category: "Engagement",
-          event_interest: selected.join(", "),
-          value: 1
-        });
-      } catch (error) {
-        setStatus(status, "error", error instanceof Error ? error.message : "Unable to register right now.");
-      } finally {
-        if (eventSubmit) {
-          eventSubmit.disabled = false;
-          eventSubmit.textContent = "Register Interest";
-        }
-      }
+      await submitWithToken();
     };
     eventSubmit?.addEventListener("click", eventHandler);
     cleanup.push(() => eventSubmit?.removeEventListener("click", eventHandler));
@@ -483,49 +510,70 @@ const recaptchaToken =
       const status = document.getElementById("contact-form-status");
       const button = document.getElementById("contact-submit") as HTMLButtonElement | null;
       const formData = new FormData(contactForm);
-      const recaptchaToken =
-  contactWidget !== undefined &&
-  window.grecaptcha &&
-  typeof window.grecaptcha.getResponse === "function"
-    ? window.grecaptcha.getResponse(contactWidget)
-    : "";
 
-      if (!recaptchaToken) {
-        setStatus(status, "error", "Please complete the captcha.");
+      const submitWithToken = async () => {
+        const recaptchaToken =
+          contactWidget !== undefined &&
+          window.grecaptcha &&
+          typeof window.grecaptcha.getResponse === "function"
+            ? window.grecaptcha.getResponse(contactWidget)
+            : "";
+
+        if (!recaptchaToken) {
+          setStatus(status, "error", "Please complete the captcha.");
+          return;
+        }
+
+        if (button) {
+          button.disabled = true;
+          button.textContent = "Sending...";
+        }
+
+        try {
+          const res = await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: formData.get("name"),
+              email: formData.get("email"),
+              service: formData.get("service"),
+              message: formData.get("message"),
+              website: formData.get("website"),
+              recaptchaToken
+            })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || "Unable to send.");
+          setStatus(status, "success", "Thanks. Your message has been sent.");
+          contactForm.reset();
+          window.grecaptcha?.reset(contactWidget);
+        } catch (error) {
+          setStatus(status, "error", error instanceof Error ? error.message : "Unable to send your message right now.");
+        } finally {
+          if (button) {
+            button.disabled = false;
+            button.textContent = "Send Message";
+          }
+        }
+      };
+
+      if (!window.grecaptcha || typeof window.grecaptcha.execute !== "function") {
+        setStatus(status, "error", "Captcha is not available right now.");
         return;
       }
 
-      if (button) {
-        button.disabled = true;
-        button.textContent = "Sending...";
+      if (contactWidget !== undefined) {
+        window.grecaptcha.execute(contactWidget);
+        setTimeout(() => {
+          if (window.grecaptcha && typeof window.grecaptcha.getResponse === "function") {
+            const token = window.grecaptcha.getResponse(contactWidget);
+            if (token) void submitWithToken();
+          }
+        }, 100);
+        return;
       }
 
-      try {
-        const res = await fetch("/api/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: formData.get("name"),
-            email: formData.get("email"),
-            service: formData.get("service"),
-            message: formData.get("message"),
-            website: formData.get("website"),
-            recaptchaToken
-          })
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "Unable to send.");
-        setStatus(status, "success", "Thanks. Your message has been sent.");
-        contactForm.reset();
-        window.grecaptcha?.reset(contactWidget);
-      } catch (error) {
-        setStatus(status, "error", error instanceof Error ? error.message : "Unable to send your message right now.");
-      } finally {
-        if (button) {
-          button.disabled = false;
-          button.textContent = "Send Message";
-        }
-      }
+      await submitWithToken();
     };
     contactForm?.addEventListener("submit", contactHandler);
     cleanup.push(() => contactForm?.removeEventListener("submit", contactHandler));
