@@ -29,6 +29,8 @@ export default function SiteClient() {
     const cleanup: Array<() => void> = [];
     let contactWidget: number | undefined;
     let eventsWidget: number | undefined;
+    let submitContactAfterCaptcha: (() => void) | undefined;
+    let submitEventsAfterCaptcha: (() => void) | undefined;
 
     // Current year
     const year = document.getElementById("current-year");
@@ -330,8 +332,9 @@ const renderCaptcha = () => {
       size: "invisible",
       badge: "bottomright",
       callback: () => {
-        const form = document.getElementById("contact-form") as HTMLFormElement | null;
-        form?.requestSubmit();
+        const submit = submitContactAfterCaptcha;
+        submitContactAfterCaptcha = undefined;
+        submit?.();
       }
     });
   }
@@ -342,8 +345,9 @@ const renderCaptcha = () => {
       size: "invisible",
       badge: "bottomright",
       callback: () => {
-        const button = document.getElementById("evtSubmitBtn") as HTMLButtonElement | null;
-        button?.click();
+        const submit = submitEventsAfterCaptcha;
+        submitEventsAfterCaptcha = undefined;
+        submit?.();
       }
     });
   }
@@ -486,13 +490,8 @@ if (SITE_KEY) {
       };
 
       if (eventsWidget !== undefined) {
+        submitEventsAfterCaptcha = () => void submitWithToken();
         window.grecaptcha.execute(eventsWidget);
-        setTimeout(() => {
-          if (window.grecaptcha && typeof window.grecaptcha.getResponse === "function") {
-            const token = window.grecaptcha.getResponse(eventsWidget);
-            if (token) void submitWithToken();
-          }
-        }, 100);
         return;
       }
 
@@ -563,13 +562,8 @@ if (SITE_KEY) {
       }
 
       if (contactWidget !== undefined) {
+        submitContactAfterCaptcha = () => void submitWithToken();
         window.grecaptcha.execute(contactWidget);
-        setTimeout(() => {
-          if (window.grecaptcha && typeof window.grecaptcha.getResponse === "function") {
-            const token = window.grecaptcha.getResponse(contactWidget);
-            if (token) void submitWithToken();
-          }
-        }, 100);
         return;
       }
 
