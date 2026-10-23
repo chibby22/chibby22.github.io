@@ -1,0 +1,12 @@
+import Link from "next/link";
+
+export default function AboutPage() {
+  return (
+    <>
+      <section className="kn-about-hero"><div className="kn-container"><span className="kn-eyebrow kn-eyebrow-light"><i /> One brand, two ways to help</span><h1>About<br /><em>Kynected.</em></h1><p className="kn-about-lead">One call for every solution!</p><span className="kn-about-index">MANCHESTER · UNITED KINGDOM</span></div></section>
+      <section className="kn-section kn-about-story"><div className="kn-container kn-about-story-grid"><span className="kn-eyebrow">Why Kynected?</span><div><h2>Making it easier<br /><em>to find help.</em></h2><p>Kynected is built on a simple idea: the right connection can make life easier.</p><p>We help creators find brands to work with, help businesses connect with creators, and help people find support with everyday tasks.</p><p>Our work has two parts: Creator & Brand Partnerships and Home & Lifestyle Services.</p><p>Both start the same way: we listen to what you need and help you work out a next step.</p></div></div></section>
+      <section className="kn-section kn-about-divisions"><div className="kn-container"><div className="kn-section-heading"><div><span className="kn-eyebrow">Two ways we can help</span><h2>Choose what<br /><em>you need.</em></h2></div><p>Visit a service page to learn more, or contact us if you’re not sure where to start.</p></div><div className="kn-about-card-grid"><article className="kn-about-card creator"><span className="kn-eyebrow">01 / For creators and brands</span><h3>Creator & Brand<br /><em>Partnerships</em></h3><p>We help creators find brands and help businesses find creators who are a good fit.</p><Link className="kn-text-link" href="/creator-partnerships">See how we can help <span>↗</span></Link></article><article className="kn-about-card lifestyle"><span className="kn-eyebrow">02 / For everyday jobs</span><h3>Home & Lifestyle<br /><em>Services</em></h3><p>Help with cleaning, errands, small repairs, furniture and everyday tech.</p><Link className="kn-text-link" href="/home-lifestyle">See our services <span>↗</span></Link></article></div></div></section>
+      <section className="kn-about-cta"><div className="kn-container"><span className="kn-eyebrow kn-eyebrow-light">Let’s find the next step</span><h2>Every good connection<br /><em>begins somewhere.</em></h2><Link className="kn-button kn-button-gold" href="/contact">Talk to Kynected <span>↗</span></Link></div></section>
+    </>
+  );
+}

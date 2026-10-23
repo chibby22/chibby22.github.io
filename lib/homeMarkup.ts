@@ -579,7 +579,7 @@ export const homeMarkup = String.raw`
                             </label>
                         </div>
 
-                        <input type="text" id="evtWebsite" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"><div id="events-recaptcha" class="mb-3"></div><button type="button" id="evtSubmitBtn" class="btn-action-oval w-100">Register Interest</button>
+                        <input type="text" id="evtWebsite" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"><button type="button" id="evtSubmitBtn" class="btn-action-oval w-100">Register Interest</button>
                         <div id="events-form-status" class="events-form-status" aria-live="polite"></div>
                     </div>
                 </div>
@@ -619,7 +619,15 @@ export const homeMarkup = String.raw`
                 <div class="col-lg-7 mt-4 mt-lg-0 fade-in">
                     <form id="contact-form" class="contact-form" novalidate>
                         <div class="mb-3"><input type="text" name="name" placeholder="Your Name" required class="form-control" autocomplete="name"></div>
-                        <div class="mb-3"><input type="email" name="email" placeholder="Your Email" required class="form-control" autocomplete="email"></div>
+                        <div class="mb-3">
+                            <input type="email" name="email" placeholder="Your Email" required class="form-control" autocomplete="email">
+                            <div class="email-domain-options" aria-label="Common email providers">
+                                <span class="email-domain-label">Quick add:</span>
+                                <button type="button" class="email-domain-option" data-domain="@gmail.com">@gmail.com</button>
+                                <button type="button" class="email-domain-option" data-domain="@yahoo.com">@yahoo.com</button>
+                                <button type="button" class="email-domain-option" data-domain="@outlook.com">@outlook.com</button>
+                            </div>
+                        </div>
                         <div class="mb-3">
                             <select name="service" class="form-control">
                                 <option value="" disabled selected>Service you're interested in (optional)</option>
@@ -640,7 +648,7 @@ export const homeMarkup = String.raw`
                             </select>
                         </div>
                         <div class="mb-3"><textarea name="message" placeholder="Your Message" rows="5" required class="form-control"></textarea></div>
-                        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"><div id="contact-recaptcha" class="mb-3"></div>
+                        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
                         <button type="submit" id="contact-submit" class="btn-action-oval">Send Message</button><div id="contact-form-status" class="events-form-status" aria-live="polite"></div>
                     </form>
                 </div>

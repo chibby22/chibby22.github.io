@@ -1,3 +1,5 @@
+// Archived 2026-10-09: this route is intentionally outside app/ so it is not public.
+// Kept as a reference for the former Kynected Events signup flow.
 import { NextResponse } from "next/server";
 import {
   forwardToFormSubmit,
@@ -16,25 +18,21 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-
-    if (normaliseText(body.website, 100)) {
-      return NextResponse.json({ ok: true });
-    }
+    if (normaliseText(body.website, 100)) return NextResponse.json({ ok: true });
 
     const name = normaliseText(body.name, 120);
     const email = validEmail(body.email);
     const events = normaliseText(body.events, 1000);
     const consent = body.consent === true;
-
     if (!name || !email || !consent) {
       return NextResponse.json({ error: "Please complete the required fields." }, { status: 400 });
     }
 
-    if (!(await verifyRecaptcha(body.recaptchaToken, request))) {
+    if (!(await verifyRecaptcha(body.recaptchaToken, request, "events_submit"))) {
       return NextResponse.json({ error: "Captcha verification failed." }, { status: 400 });
     }
 
-      await forwardToFormSubmit({
+    await forwardToFormSubmit({
       _subject: `Kynected Events Interest — ${name}`,
       form_type: "events_mailing_list",
       name,
@@ -42,7 +40,7 @@ export async function POST(request: Request) {
       events_interested_in: events || "None specified",
       consent: "yes",
       date: new Date().toISOString()
-    });
+    }, request.headers.get("origin") || "");
 
     return NextResponse.json({ ok: true });
   } catch (error) {

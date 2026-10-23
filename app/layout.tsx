@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
+import SiteFooter from "@/components/SiteFooter";
+import SiteHeader from "@/components/SiteHeader";
+import SitePreferences from "@/components/SitePreferences";
+import "./multipage.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kynected.co.uk"),
-  title: "KYNECTED | Cleaning, Repairs & Professional Services in Manchester",
+  title: "KYNECTED | Creator Partnerships & Home Lifestyle Services",
   description:
-    "Kynected offers trusted professional services and free community events in Manchester. PS5 cleaning, laptop repair, phone repair, Airbnb cleaning, handyman, advice, parcel collection and more.",
+    "Kynected connects creators with brand opportunities and helps individuals and businesses find practical home and lifestyle support.",
   authors: [{ name: "KYNECTED" }],
   alternates: { canonical: "/" },
   openGraph: {
-    title: "KYNECTED | Cleaning, Repairs & Community Events in Manchester",
-    description:
-      "Professional services and free community events in Manchester. PS5 cleaning, laptop repair, Airbnb cleaning, parcel collection, advice and more.",
+    title: "KYNECTED | Creator Partnerships & Home Lifestyle Services",
+    description: "Creator and brand partnership enquiries, plus practical home and lifestyle services from Kynected.",
     url: "https://kynected.co.uk",
     type: "website",
     locale: "en_GB"
@@ -33,10 +35,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>
-        {children}
-        <Script src="https://kit.fontawesome.com/529b0fabf6.js" crossOrigin="anonymous" strategy="afterInteractive" />
+        <a className="kn-skip-link" href="#main-content">Skip to content</a>
+        <SiteHeader />
+        <main id="main-content">{children}</main>
+        <SiteFooter />
+        <SitePreferences />
       </body>
     </html>
   );

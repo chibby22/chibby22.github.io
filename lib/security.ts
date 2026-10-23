@@ -15,13 +15,17 @@ export function originAllowed(request: Request) {
 
   const configured = (process.env.ALLOWED_ORIGINS || "")
     .split(",")
-    .map((v) => v.trim())
+    .map((value) => value.trim())
     .filter(Boolean);
 
   return configured.includes(origin);
 }
 
-export async function verifyRecaptcha(token: unknown, request: Request) {
+export async function verifyRecaptcha(
+  token: unknown,
+  request: Request,
+  expectedAction: string
+) {
   const secret = process.env.RECAPTCHA_SECRET_KEY;
   if (!secret || typeof token !== "string" || !token) return false;
 
@@ -33,55 +37,72 @@ export async function verifyRecaptcha(token: unknown, request: Request) {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body,
-    cache: "no-store"
+    cache: "no-store",
   });
 
   if (!response.ok) return false;
-  const result = (await response.json()) as { success?: boolean };
-  return result.success === true;
+
+  const result = (await response.json()) as {
+    success?: boolean;
+    score?: number;
+    action?: string;
+  };
+  const minimumScore = Number(process.env.RECAPTCHA_MIN_SCORE ?? "0.5");
+
+  return (
+    result.success === true &&
+    result.action === expectedAction &&
+    typeof result.score === "number" &&
+    result.score >= minimumScore
+  );
 }
 
-// Sends validated form data from our Next.js SERVER to FormSubmit.
-//
-// The endpoint comes from .env.local:
-// FORMSUBMIT_ENDPOINT=https://formsubmit.co/ajax/your@email.com
-//
-// We disable FormSubmit's own captcha because we already validate
-// Google reCAPTCHA ourselves before this function is reached.
 export async function forwardToFormSubmit(
-  payload: Record<string, string>
+  payload: Record<string, string>,
+  requestOrigin: string
 ) {
   const endpoint = process.env.FORMSUBMIT_ENDPOINT;
-
-  // If this variable is missing, stop immediately.
-  if (!endpoint) {
-    throw new Error("FORMSUBMIT_ENDPOINT is not configured");
+  if (!endpoint || !endpoint.startsWith("https://formsubmit.co/ajax/")) {
+    throw new Error("FORMSUBMIT_ENDPOINT is missing or invalid");
   }
+  let originUrl: URL;
+  try {
+    originUrl = new URL(requestOrigin);
+  } catch {
+    throw new Error("Request origin is invalid");
+  }
+  if (originUrl.origin !== requestOrigin || !["http:", "https:"].includes(originUrl.protocol)) {
+    throw new Error("Request origin is invalid");
+  }
+
+  const formData = new URLSearchParams();
+  for (const [key, value] of Object.entries(payload)) {
+    formData.append(key, value);
+  }
+  formData.append("_template", "table");
+  formData.append("_captcha", "false");
 
   const response = await fetch(endpoint, {
     method: "POST",
-
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
+      Origin: originUrl.origin,
+      Referer: `${originUrl.origin}/`,
     },
-
-    // These extra FormSubmit fields control the email format.
-    body: JSON.stringify({
-      ...payload,
-
-      // Makes the received email easier to read.
-      _template: "table",
-
-      // We already verify Google reCAPTCHA server-side.
-      _captcha: "false",
-    }),
-
-    // Never cache form submissions.
+    body: formData.toString(),
     cache: "no-store",
   });
 
   if (!response.ok) {
-    throw new Error(`FormSubmit returned ${response.status}`);
+    throw new Error(`FormSubmit returned HTTP ${response.status}`);
+  }
+
+  const result = (await response.json()) as {
+    success?: boolean | string;
+    message?: string;
+  };
+  if (result.success !== true && result.success !== "true") {
+    throw new Error(result.message || "FormSubmit did not accept the submission");
   }
 }

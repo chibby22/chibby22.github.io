@@ -26,12 +26,14 @@ export async function POST(request: Request) {
     const email = validEmail(body.email);
     const service = normaliseText(body.service, 120);
     const message = normaliseText(body.message, 3000);
+    const enquiryType = normaliseText(body.enquiryType, 40);
+    const allowedEnquiryTypes = new Set(["creator", "brand", "lifestyle", "general"]);
 
-    if (!name || !email || !message) {
+    if (!name || !email || !message || !allowedEnquiryTypes.has(enquiryType)) {
       return NextResponse.json({ error: "Please complete the required fields." }, { status: 400 });
     }
 
-    if (!(await verifyRecaptcha(body.recaptchaToken, request))) {
+    if (!(await verifyRecaptcha(body.recaptchaToken, request, "contact_submit"))) {
       return NextResponse.json({ error: "Captcha verification failed." }, { status: 400 });
     }
 
@@ -44,26 +46,42 @@ export async function POST(request: Request) {
 //
 // Only after those checks do we forward the message to FormSubmit.
 
-await forwardToFormSubmit({
-  // This becomes the subject of the email you receive.
-  _subject: `Kynected enquiry — ${
-    service || "General enquiry"
-  } — ${name}`,
+    const extraFields: Array<[string, string, number]> = [
+      ["Company", body.companyName, 160],
+      ["Creator platform", body.platform, 80],
+      ["Creator profile", body.profileLink, 500],
+      ["Content niche", body.niche, 160],
+      ["Approximate audience size", body.audienceSize, 60],
+      ["Creator requirements", body.creatorRequirements, 300],
+      ["Campaign timeframe", body.timeframe, 120],
+      ["Approximate budget", body.budget, 100],
+      ["General location", body.location, 120],
+    ];
+    const additionalDetails = extraFields
+      .map(([label, value, max]) => [label, normaliseText(value, max)] as const)
+      .filter(([, value]) => value);
+    const fullMessage = [
+      message,
+      ...(additionalDetails.length
+        ? ["", "Additional enquiry details:", ...additionalDetails.map(([label, value]) => `${label}: ${value}`)]
+        : []),
+    ].join("\n");
+    const categoryLabels: Record<string, string> = {
+      creator: "Content Creator Consultation",
+      brand: "Brand or Business Consultation",
+      lifestyle: "Home & Lifestyle Service Enquiry",
+      general: "General Enquiry",
+    };
 
-  // Useful for identifying which form produced the email.
-  form_type: "contact",
-
-  // Keeps the service category clear in your received emails.
-  category: service || "General enquiry",
-
-  name,
-  email,
-
-  // Your existing dropdown value gets passed here.
-  service: service || "General enquiry",
-
-  message,
-});
+    await forwardToFormSubmit({
+      _subject: `Kynected ${categoryLabels[enquiryType]} — ${name}`,
+      form_type: "contact",
+      enquiry_type: categoryLabels[enquiryType],
+      name,
+      email,
+      service: service || "Not specified",
+      message: fullMessage,
+    }, request.headers.get("origin") || "");
 
     return NextResponse.json({ ok: true });
   } catch (error) {
