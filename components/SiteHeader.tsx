@@ -21,7 +21,16 @@ export default function SiteHeader() {
     <header className="kn-header">
       <div className="kn-header-inner">
         <Link className="kn-brand" href="/" aria-label="Kynected home" onClick={() => setMenuOpen(false)}>
-          <span className="kn-brand-mark"><Image src="/images/K_LOGO.png" alt="" width={48} height={48} priority /></span>
+          <span className="kn-brand-mark">
+            <Image
+              src="/images/justK_trans.png"
+              alt=""
+              width={1330}
+              height={1183}
+              sizes="(max-width: 520px) 50px, 60px"
+              preload
+            />
+          </span>
           <span className="kn-brand-word">KYNECTED<span>.</span></span>
         </Link>
         <button

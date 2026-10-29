@@ -24,8 +24,8 @@ body:has(.kn-consent-backdrop) { overflow: hidden; }
 .kn-header { position: sticky; top: 0; z-index: 1000; background: rgba(13,27,42,.97); border-bottom: 1px solid rgba(255,255,255,.11); backdrop-filter: blur(14px); }
 .kn-header-inner { width: min(1260px, calc(100% - 48px)); min-height: 78px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
 .kn-brand { display: inline-flex; align-items: center; gap: 11px; color: #fff; text-decoration: none; flex: 0 0 auto; }
-.kn-brand-mark { display: grid; place-items: center; width: 43px; height: 43px; overflow: hidden; border-radius: 10px; background: white; }
-.kn-brand-mark img { width: 100%; height: 100%; object-fit: cover; }
+.kn-brand-mark { display: grid; place-items: center; width: 60px; height: 54px; flex: 0 0 auto; background: transparent; }
+.kn-brand-mark img { width: 100%; height: 100%; object-fit: contain; }
 .kn-brand-word,.kn-footer-wordmark { color: #fff; font-weight: 800; font-size: 1.13rem; letter-spacing: .17em; }
 .kn-brand-word span,.kn-footer-wordmark span { color: var(--kn-gold); }
 .kn-nav { display: flex; flex: 1; align-items: center; justify-content: space-between; gap: 12px; margin-left: clamp(28px, 5vw, 76px); }
@@ -142,4 +142,209 @@ body:has(.kn-consent-backdrop) { overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after { scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important; }
+}
+
+/* Refinements: clear typography, restrained interactions and accessible motion. */
+.kn-brand-word {
+  font-family: "Agdasima", "Arial Narrow", sans-serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+.kn-section-heading h2,
+.kn-intro-grid h2,
+.kn-form-intro h2,
+.kn-contact-aside h2,
+.kn-home-hero-copy h1,
+.kn-creator-hero-copy h1,
+.kn-lifestyle-hero h1,
+.kn-about-hero h1,
+.kn-contact-hero h1,
+.kn-home-cta h2,
+.kn-partnership-cta h2,
+.kn-about-cta h2,
+.kn-division-content h3,
+.kn-about-card h3 {
+  letter-spacing: normal;
+  line-height: 1.1;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+.kn-home-hero-copy h1.kn-home-wordmark {
+  margin: 17px 0 0;
+  color: #fff;
+  font-family: "Agdasima", "Arial Narrow", sans-serif;
+  font-size: clamp(4rem, 8vw, 7.2rem);
+  font-weight: 700;
+  line-height: .95;
+  letter-spacing: .09em;
+}
+.kn-home-wordmark span {
+  position: relative;
+  display: inline-block;
+  padding-right: .1em;
+  white-space: nowrap;
+  clip-path: inset(0 100% 0 0);
+  animation: kn-typewriter 1.45s steps(8, end) both;
+}
+.kn-home-wordmark span::after {
+  position: absolute;
+  top: .05em;
+  left: 0;
+  bottom: .05em;
+  width: 2px;
+  background: var(--kn-gold);
+  content: "";
+  animation: kn-cursor-move 1.45s steps(8, end) both, kn-cursor 1s step-end 3 1.45s;
+}
+@keyframes kn-typewriter {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes kn-cursor-move {
+  from { left: 0; }
+  to { left: 100%; }
+}
+@keyframes kn-cursor {
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.kn-rotating-slogan {
+  min-height: 2.2rem;
+  margin: 12px 0 15px;
+  color: #edb76b;
+  font-family: var(--kn-display);
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  line-height: 1.4;
+}
+.kn-rotating-slogan span { display: inline-block; animation: kn-slogan-in .35s ease both; }
+@keyframes kn-slogan-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.kn-home-hero-copy>p:not(.kn-rotating-slogan) { max-width: 570px; }
+.kn-home-art { cursor: default; }
+.kn-art-orbit { transition: transform .7s ease, border-color .7s ease; }
+.kn-home-art:hover .kn-art-orbit-one,
+.kn-home-art:focus-within .kn-art-orbit-one { transform: rotate(2deg) scale(1.03); border-color: rgba(233,159,71,.55); }
+.kn-home-art:hover .kn-art-orbit-two,
+.kn-home-art:focus-within .kn-art-orbit-two { transform: rotate(38deg) scale(.98); border-color: rgba(255,255,255,.35); }
+.kn-home-art .kn-art-logo { position: relative; z-index: 1; }
+.kn-division-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.kn-division-card { display: flex; flex-direction: column; }
+.kn-division-visual { flex: 0 0 220px; }
+.kn-visual-k-mark { position: relative; z-index: 1; width: 86px; height: 86px; object-fit: contain; border-radius: 50%; }
+.kn-visual-home { background: #f3f1eb; }
+.kn-visual-home img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.kn-division-content { display: flex; flex: 1; flex-direction: column; align-items: flex-start; }
+.kn-division-content>p { flex: 1; }
+.kn-division-cta { margin-top: 16px; padding: 10px 13px; border: 1px solid rgba(233,159,71,.48); transition: box-shadow .2s ease, background-color .2s ease, transform .2s ease; }
+.kn-division-cta:hover,.kn-division-cta:focus-visible { background: rgba(233,159,71,.1); box-shadow: 0 0 16px rgba(233,159,71,.28); transform: translateY(-1px); }
+.kn-division-creator .kn-division-cta { border-color: rgba(233,159,71,.65); }
+.kn-division-creator .kn-division-cta:hover,.kn-division-creator .kn-division-cta:focus-visible { background: rgba(233,159,71,.12); }
+.kn-benefit-card h3 { letter-spacing: normal; line-height: 1.3; }
+.kn-creator-art-frame { border-color: transparent; background: radial-gradient(ellipse at 50% 65%,rgba(0,168,150,.2),transparent 43%); }
+.kn-creator-art-frame::before,.kn-creator-art-frame::after { pointer-events: none; }
+.kn-brands-section { border-block: 1px solid #d5e2df; }
+.kn-brands-section .kn-partner-card { background: rgba(255,255,255,.74); }
+.kn-brands-section .kn-section-cta-row .kn-button { box-shadow: 0 5px 18px rgba(23,45,77,.14); }
+.kn-process-step>p { transition: opacity .25s ease; }
+.kn-process-step[open]>p { animation: kn-accordion-in .3s ease both; }
+@keyframes kn-accordion-in {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.kn-daily-quote { padding-block: 55px; background: #f8f7f4; }
+.kn-daily-quote-text {
+  margin: 14px 0 0;
+  color: var(--kn-navy);
+  font-family: var(--kn-display);
+  font-size: clamp(1.45rem, 3vw, 2.25rem);
+  line-height: 1.4;
+}
+.kn-partnership-cta-mark {
+  width: clamp(100px, 17vw, 210px);
+  height: auto;
+  object-fit: contain;
+  opacity: .16;
+}
+.kn-lifestyle-brand-line {
+  margin: 18px 0 0;
+  color: var(--kn-navy);
+  font-family: var(--kn-display);
+  font-size: 1.35rem;
+}
+.kn-lifestyle-illustration {
+  display: block;
+  min-height: 0;
+  border: 0;
+  background: transparent;
+}
+.kn-lifestyle-illustration img { display: block; width: 100%; height: auto; }
+.kn-help-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(30px, 6vw, 75px); }
+.kn-lifestyle-benefits { padding: 92px 0; background: #f8f7f4; }
+.kn-help-copy h2 {
+  margin: 12px 0 20px;
+  color: var(--kn-ink);
+  font-family: var(--kn-display);
+  font-size: clamp(2.7rem, 5.6vw, 4.6rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: normal;
+}
+.kn-help-copy>p { max-width: 570px; color: var(--kn-muted); font-size: .98rem; line-height: 1.8; }
+.kn-help-copy .kn-button { margin-top: 12px; }
+.kn-help-closing { display: block; margin-top: 19px; color: #9b6a28; font-family: var(--kn-display); font-size: 1rem; font-style: italic; }
+.kn-help-illustration img { display: block; width: 100%; height: auto; }
+.kn-about-story .kn-about-story-grid { margin-bottom: 55px; }
+.kn-about-story .kn-about-card-grid { margin-left: calc(33.333% + 30px); }
+.kn-about-story .kn-about-card { min-height: 0; }
+.kn-contact-aside-note:nth-of-type(2) { display: none; }
+.kn-form-status.success { color: #145b37; background: #e6f4eb; border-color: #88c59c; }
+.kn-form-status.error { color: #8a1f1f; background: #fff0ed; border-color: #e2a39a; }
+.kn-scroll-reveal { opacity: 0; transform: translateY(14px); transition: opacity .65s ease, transform .65s ease; }
+.kn-scroll-reveal.is-visible { opacity: 1; transform: none; }
+.kn-button:focus-visible { box-shadow: 0 0 0 4px rgba(233,159,71,.28); }
+.kn-button:hover,.kn-button:focus-visible { box-shadow: 0 0 15px rgba(233,159,71,.24); }
+
+@media (max-width: 900px) {
+  .kn-about-story .kn-about-card-grid { margin-left: 0; }
+}
+@media (max-width: 768px) {
+  .kn-home-hero-grid { grid-template-columns: 1fr; gap: 10px; padding-top: 55px; padding-bottom: 45px; }
+  .kn-home-hero-copy h1.kn-home-wordmark { font-size: clamp(3.8rem, 13vw, 5.5rem); }
+  .kn-home-art { min-height: 310px; }
+  .kn-art-logo { width: min(75%, 310px); }
+  .kn-division-grid,.kn-help-grid { grid-template-columns: 1fr; }
+  .kn-division-visual { flex-basis: 190px; }
+  .kn-benefit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kn-benefit-card { min-width: 0; padding: 22px 16px; border-bottom: 1px solid var(--kn-line); }
+  .kn-benefit-card h3,.kn-benefit-card p { overflow-wrap: anywhere; }
+  .kn-benefit-card:nth-child(2) { border-right: 0; }
+  .kn-benefit-card:nth-child(n+3) { border-bottom: 0; }
+  .kn-benefit-card:first-child { padding-left: 16px; }
+  .kn-help-illustration { max-width: 540px; margin-inline: auto; }
+  .kn-brands-section .kn-section-cta-row { align-items: flex-start; flex-direction: column; }
+}
+@media (max-width: 520px) {
+  .kn-brand-mark { width: 50px; height: 45px; }
+  .kn-brand-word { font-size: 1.38rem; }
+  .kn-home-hero-copy h1.kn-home-wordmark { font-size: clamp(3.25rem, 12.5vw, 4.2rem); }
+  .kn-rotating-slogan { font-size: 1.15rem; }
+  .kn-creator-art { padding-right: 0; }
+  .kn-creator-art-frame { min-height: 290px; }
+  .kn-daily-quote { padding-block: 42px; }
+}
+@media (max-width: 380px) {
+  .kn-partner-card-grid { grid-template-columns: 1fr; }
+  .kn-partner-card,.kn-partner-card:nth-child(2) { border-left: 1px solid #d9d9d6; border-right: 1px solid #d9d9d6; }
+  .kn-partner-card:not(:last-child) { border-bottom: 1px solid #d9d9d6; }
+  .kn-partner-card:last-child { border-bottom: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kn-scroll-reveal,.kn-scroll-reveal.is-visible { opacity: 1; transform: none; }
+  .kn-home-wordmark span { clip-path: none; animation: none; }
+  .kn-home-wordmark span::after { display: none; }
+  .kn-art-orbit { transition: none; }
+  .kn-process-step[open]>p { animation: none; }
 }

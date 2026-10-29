@@ -4,6 +4,7 @@ import "./globals.css";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import SitePreferences from "@/components/SitePreferences";
+import ScrollReveals from "@/components/ScrollReveals";
 import "./multipage.css";
 
 export const metadata: Metadata = {
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main id="main-content">{children}</main>
         <SiteFooter />
         <SitePreferences />
+        <ScrollReveals />
       </body>
     </html>
   );

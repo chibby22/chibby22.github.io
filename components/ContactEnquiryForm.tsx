@@ -113,7 +113,7 @@ export default function ContactEnquiryForm() {
       });
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "We could not send your enquiry.");
-      setStatus({ kind: "success", message: "Thanks for your message. We’ll get back to you as soon as we can." });
+      setStatus({ kind: "success", message: "Your enquiry has been accepted for processing. We’ll be in touch as soon as we can." });
       form.reset();
       setService("");
     } catch (error) {
@@ -145,17 +145,11 @@ export default function ContactEnquiryForm() {
         </label>
 
         {type === "creator" && <>
-          <label className="kn-field"><span>Where do you post?</span><select name="platform" defaultValue=""><option value="" disabled>Select a platform</option><option>Instagram</option><option>TikTok</option><option>YouTube</option><option>Twitch</option><option>Other</option></select></label>
           <label className="kn-field"><span>Profile link <small>Optional</small></span><input name="profileLink" type="url" placeholder="https://" maxLength={500} /></label>
-          <label className="kn-field"><span>What do you post about? <small>Optional</small></span><input name="niche" type="text" maxLength={160} placeholder="e.g. beauty, gaming, food" /></label>
-          <label className="kn-field"><span>About how many followers? <small>Optional</small></span><select name="audienceSize" defaultValue=""><option value="">Prefer not to say</option><option>Under 1,000</option><option>1,000–10,000</option><option>10,000–50,000</option><option>50,000–100,000</option><option>100,000+</option></select></label>
         </>}
 
         {type === "brand" && <>
           <label className="kn-field"><span>Company or organisation <small>Optional</small></span><input name="companyName" type="text" autoComplete="organization" maxLength={160} /></label>
-          <label className="kn-field"><span>When are you looking to do this? <small>Optional</small></span><input name="timeframe" type="text" maxLength={120} placeholder="e.g. Autumn 2026" /></label>
-          <label className="kn-field"><span>Budget <small>Optional</small></span><input name="budget" type="text" maxLength={100} placeholder="If known" /></label>
-          <label className="kn-field kn-field-full"><span>What kind of creator are you looking for? <small>Optional</small></span><input name="creatorRequirements" type="text" maxLength={300} placeholder="Audience, platform or style" /></label>
         </>}
 
         {type === "lifestyle" && <>
@@ -163,7 +157,7 @@ export default function ContactEnquiryForm() {
           <label className="kn-field"><span>General location <small>Optional</small></span><input name="location" type="text" autoComplete="address-level2" maxLength={120} placeholder="Town or postcode area" /></label>
         </>}
 
-        <label className="kn-field kn-field-full"><span>{type === "brand" ? "What would you like to promote?" : type === "creator" ? "What would you like help with?" : type === "lifestyle" ? "What needs doing?" : "Your message"}</span><textarea name="message" rows={5} maxLength={3000} required /></label>
+        <label className="kn-field kn-field-full"><span>{type === "brand" ? "Tell us about your enquiry." : type === "creator" ? "What would you like help with?" : type === "lifestyle" ? "Description of the service required" : "Tell us about your enquiry."}</span><textarea name="message" rows={5} maxLength={3000} required /></label>
         <input name="website" type="text" className="kn-honeypot" tabIndex={-1} autoComplete="off" aria-hidden="true" />
         <div className="kn-form-submit kn-field-full">
           <button className="kn-button kn-button-primary" type="submit" disabled={submitting}>{submitting ? "Sending…" : "Send message"}<span aria-hidden="true">↗</span></button>
