@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 
 const quotes = [
-  "Great opportunities often begin with the right introduction.",
-  "Individual ambition grows stronger through meaningful connections.",
-  "The right partnership can turn a good idea into something greater.",
-  "Success takes effort. Progress often takes collaboration.",
-  "A thoughtful conversation can open an unexpected door.",
-  "Good work grows when the right people move forward together.",
+  { text: "Great opportunities often begin with the right introduction.", author: "Kynected" },
+  { text: "Individual ambition grows stronger through meaningful connections.", author: "Kynected" },
+  { text: "The right partnership can turn a good idea into something greater.", author: "Kynected" },
+  { text: "Success takes effort. Progress often takes collaboration.", author: "Kynected" },
+  { text: "A thoughtful conversation can open an unexpected door.", author: "Kynected" },
+  { text: "Good work grows when the right people move forward together.", author: "Kynected" },
 ];
 
 function getTodayIndex() {
@@ -33,5 +33,12 @@ export default function DailyQuote() {
     return () => window.clearTimeout(timer);
   }, []);
 
-  return <blockquote className="kn-daily-quote-text" key={quoteIndex}>“{quotes[quoteIndex]}”</blockquote>;
+  const quote = quotes[quoteIndex];
+
+  return (
+    <blockquote className="kn-daily-quote-text" key={quoteIndex}>
+      <p>“{quote.text}”</p>
+      <cite>— {quote.author}</cite>
+    </blockquote>
+  );
 }

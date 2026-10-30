@@ -52,7 +52,7 @@ export default function HomePage() {
             </article>
             <article className="kn-division-card kn-division-home">
               <div className="kn-card-topline"><span>02 / HOME & LIFESTYLE</span><span aria-hidden="true">✳</span></div>
-              <div className="kn-division-visual kn-visual-home"><Image src="/images/kynected_home_hero.png" alt="" width={480} height={260} /></div>
+              <div className="kn-division-visual kn-visual-home"><Image src="/images/kynected_home_hero.png" alt="" width={826} height={941} sizes="(max-width: 700px) calc(100vw - 34px), (max-width: 768px) calc(100vw - 48px), (max-width: 960px) 50vw, 46vw" /></div>
               <div className="kn-division-content"><span className="kn-eyebrow">Home & Lifestyle Services</span><h3>Everyday Tasks.<br /><em>Made Easier.</em></h3><p>Helping individuals and businesses with cleaning, personal errands, minor home repairs, furniture assembly and everyday technology support.</p><Link className="kn-text-link kn-division-cta" href="/home-lifestyle">Explore Home Services <span>↗</span></Link></div>
             </article>
           </div>
