@@ -37,6 +37,14 @@ export default function HomePage() {
       <section className="kn-section kn-intro-section">
         <div className="kn-container kn-intro-grid">
           <span className="kn-eyebrow">A more connected way forward</span>
+          <Image
+            className="kn-intro-conversation"
+            src="/images/business_conversation.png"
+            alt="Two business professionals discussing a partnership."
+            width={1536}
+            height={1024}
+            sizes="(max-width: 700px) 160px, 200px"
+          />
           <div><h2>Connections That<br /><em>Make Life Easier.</em></h2><p>Finding the right person for a job or opportunity shouldn&apos;t be complicated. Tell Kynected what you need, and we&apos;ll help connect you with suitable people, services or opportunities — without the unnecessary hassle.</p><p>We work across creator partnerships and practical everyday services.</p></div>
         </div>
       </section>
@@ -53,7 +61,7 @@ export default function HomePage() {
             <article className="kn-division-card kn-division-home">
               <div className="kn-card-topline"><span>02 / HOME & LIFESTYLE</span><span aria-hidden="true">✳</span></div>
               <div className="kn-division-visual kn-visual-home"><Image src="/images/kynected_home_hero.png" alt="" width={826} height={941} sizes="(max-width: 700px) calc(100vw - 34px), (max-width: 768px) calc(100vw - 48px), (max-width: 960px) 50vw, 46vw" /></div>
-              <div className="kn-division-content"><span className="kn-eyebrow">Home & Lifestyle Services</span><h3>Everyday Tasks.<br /><em>Made Easier.</em></h3><p>Helping individuals and businesses with cleaning, personal errands, minor home repairs, furniture assembly and everyday technology support.</p><Link className="kn-text-link kn-division-cta" href="/home-lifestyle">Explore Home Services <span>↗</span></Link></div>
+              <div className="kn-division-content"><span className="kn-eyebrow">Home & Lifestyle Services</span><h3>Everyday Tasks.<br /><em>Made Easier.</em></h3><p>Helping individuals and businesses with cleaning, personal errands, minor home repairs, furniture assembly and everyday tech support.</p><Link className="kn-text-link kn-division-cta" href="/home-lifestyle">Explore Home Services <span>↗</span></Link></div>
             </article>
           </div>
         </div>

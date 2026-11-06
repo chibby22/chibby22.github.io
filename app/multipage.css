@@ -94,9 +94,12 @@ body:has(.kn-consent-backdrop) { overflow: hidden; }
 .kn-hero-scroll { position: absolute; right: 24px; bottom: 24px; color: rgba(255,255,255,.45); font-size: .62rem; letter-spacing: .13em; writing-mode: vertical-rl; }
 .kn-hero-scroll span { margin-top: 10px; color: var(--kn-gold); }
 .kn-intro-section { padding-block: 75px; background: #fff; }
-.kn-intro-grid { display: grid; grid-template-columns: .65fr 1.35fr; gap: 60px; align-items: start; }
+.kn-intro-grid { display: grid; grid-template-columns: minmax(0, .65fr) minmax(0, 1.35fr); gap: 20px 35px; align-items: start; }
+.kn-intro-grid>.kn-eyebrow { grid-column: 1; grid-row: 1; }
+.kn-intro-grid>div { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
 .kn-intro-grid h2 { margin-top: 0; font-size: clamp(2.2rem,4.2vw,3.5rem); }
 .kn-intro-grid>div>p { max-width: 690px; margin-top: 22px; color: var(--kn-muted); font-size: .98rem; line-height: 1.8; }
+.kn-intro-grid .kn-intro-conversation { grid-column: 1; grid-row: 2; }
 .kn-divisions-section { background: var(--kn-paper); }
 .kn-division-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 22px; }
 .kn-division-card { overflow: hidden; background: white; border: 1px solid var(--kn-line); }
@@ -296,12 +299,38 @@ body:has(.kn-consent-backdrop) { overflow: hidden; }
   font-size: 1.35rem;
 }
 .kn-lifestyle-illustration {
-  display: block;
-  min-height: 0;
-  border: 0;
+  display: grid;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1.286;
+  place-items: center;
+  justify-self: end;
   background: transparent;
 }
-.kn-lifestyle-illustration img { display: block; width: 100%; height: auto; }
+.kn-lifestyle-illustration img { display: block; width: 92%; height: auto; object-fit: contain; }
+.kn-lifestyle-illustration .kn-lifestyle-logo {
+  animation: kn-lifestyle-logo-float 5s ease-in-out infinite;
+  transition: transform .35s ease;
+}
+.kn-lifestyle-illustration:hover .kn-lifestyle-logo { transform: translateY(-4px) scale(1.025); }
+.kn-about-cta .kn-cta-rocket {
+  position: relative;
+  display: inline-block;
+  margin-left: .16em;
+  font-family: var(--kn-sans);
+  font-size: .5em;
+  vertical-align: .2em;
+  transition: transform 1.8s cubic-bezier(.18,.72,.24,1), filter .8s ease;
+}
+.kn-about-cta h2:hover .kn-cta-rocket,
+.kn-about-cta:focus-within h2 .kn-cta-rocket {
+  filter: drop-shadow(0 0 7px rgba(255,194,106,.8));
+  transform: translate(min(-42vw, -530px), 157px) rotate(-45deg);
+}
+@keyframes kn-lifestyle-logo-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
 .kn-help-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(30px, 6vw, 75px); }
 .kn-lifestyle-benefits { padding: 92px 0; background: #f8f7f4; }
 .kn-help-copy h2 {
@@ -323,6 +352,133 @@ body:has(.kn-consent-backdrop) { overflow: hidden; }
 .kn-contact-aside-note:nth-of-type(2) { display: none; }
 .kn-form-status.success { color: #145b37; background: #e6f4eb; border-color: #88c59c; }
 .kn-form-status.error { color: #8a1f1f; background: #fff0ed; border-color: #e2a39a; }
+
+.kn-intro-conversation {
+  display: block;
+  width: min(100%, 200px);
+  height: 125px;
+  min-height: 0;
+  max-height: 125px;
+  border-radius: 4px;
+  object-fit: cover;
+  object-position: center 48%;
+}
+.kn-creator-hero { padding: 58px 0 18px; }
+.kn-creator-hero-copy h1 { margin-block: 16px; font-size: clamp(2.5rem, 3.3vw, 3rem); }
+.kn-creator-art-frame { min-height: 340px; }
+.kn-theme-toggle {
+  display: inline-grid;
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid rgba(233,159,71,.52);
+  border-radius: 50%;
+  background: transparent;
+  color: #f2c37f;
+  font: inherit;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.kn-theme-toggle:hover { background: rgba(233,159,71,.14); border-color: var(--kn-gold); }
+.kn-theme-toggle:focus-visible,.kn-menu-toggle:focus-visible { outline: 2px solid var(--kn-gold); outline-offset: 3px; }
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --kn-ink: #edf2f7;
+  --kn-paper: #101d2c;
+  --kn-line: #34475b;
+  --kn-muted: #b2bfcc;
+  background: #0b1522;
+}
+html[data-theme="dark"] body { background: #0b1522; color: var(--kn-ink); }
+html[data-theme="dark"] #services { background: #0f1b29; }
+html[data-theme="dark"] .kn-intro-section,
+html[data-theme="dark"] .kn-benefits-section,
+html[data-theme="dark"] .kn-categories-section,
+html[data-theme="dark"] .kn-about-story,
+html[data-theme="dark"] .kn-contact-section,
+html[data-theme="dark"] .kn-lifestyle-services { background: #0f1b29; }
+html[data-theme="dark"] .kn-audience-section,
+html[data-theme="dark"] .kn-divisions-section,
+html[data-theme="dark"] .kn-about-divisions { background: #111f2f; }
+html[data-theme="dark"] .kn-brands-section { background: #15263a; border-color: #34475b; }
+html[data-theme="dark"] .kn-daily-quote { background: #142439; }
+html[data-theme="dark"] .kn-daily-quote-text { color: #eef3f8; }
+html[data-theme="dark"] .kn-lifestyle-hero { background: #142b33; }
+html[data-theme="dark"] .kn-lifestyle-benefits { background: #111f2f; }
+html[data-theme="dark"] .kn-lifestyle-illustration { border-color: rgba(237,189,121,.4); }
+html[data-theme="dark"] .kn-help-copy h2 { color: var(--kn-ink); }
+html[data-theme="dark"] .kn-help-copy>p { color: var(--kn-muted); }
+html[data-theme="dark"] .kn-help-copy .kn-button-dark { background: #edbd79; color: #0d1b2a; }
+html[data-theme="dark"] .kn-lifestyle-cta { background: #142439; color: var(--kn-ink); }
+html[data-theme="dark"] .kn-division-card:not(.kn-division-creator),
+html[data-theme="dark"] .kn-about-card:not(.creator) {
+  background: #17283b;
+  border-color: var(--kn-line);
+  color: var(--kn-ink);
+}
+html[data-theme="dark"] .kn-visual-home { background: #1b2b3c; }
+html[data-theme="dark"] .kn-eyebrow,
+html[data-theme="dark"] .kn-help-closing { color: #edbd79; }
+html[data-theme="dark"] .kn-section-heading h2 em,
+html[data-theme="dark"] .kn-intro-grid h2 em,
+html[data-theme="dark"] .kn-form-intro h2 em,
+html[data-theme="dark"] .kn-contact-aside h2 em,
+html[data-theme="dark"] .kn-about-story-grid h2 em,
+html[data-theme="dark"] .kn-division-content h3 em,
+html[data-theme="dark"] .kn-lifestyle-hero h1 em,
+html[data-theme="dark"] .kn-lifestyle-brand-line { color: #edbd79; }
+html[data-theme="dark"] .kn-brands-section .kn-section-heading h2 em { color: #67c8bd; }
+html[data-theme="dark"] .kn-partner-card-grid { border-color: var(--kn-line); }
+html[data-theme="dark"] .kn-partner-card,
+html[data-theme="dark"] .kn-brands-section .kn-partner-card { border-color: var(--kn-line); background: transparent; }
+html[data-theme="dark"] .kn-partner-card:hover,
+html[data-theme="dark"] .kn-partner-card-grid.brand .kn-partner-card:hover { background: #1c3046; }
+html[data-theme="dark"] .kn-partner-card p,
+html[data-theme="dark"] .kn-about-story-grid p,
+html[data-theme="dark"] .kn-lifestyle-hero-grid>div:first-child>p { color: #c1ccd7; }
+html[data-theme="dark"] .kn-brands-section .kn-partner-card-icon { color: #67c8bd; }
+html[data-theme="dark"] .kn-category-chip { color: var(--kn-ink); }
+html[data-theme="dark"] .kn-service-tabs button { color: #c1ccd7; }
+html[data-theme="dark"] .kn-service-tabs button:hover { background: #192b3f; }
+html[data-theme="dark"] .kn-service-tabs button.is-active { border-color: #3a526a; background: #20354b; color: var(--kn-ink); }
+html[data-theme="dark"] .kn-service-tab-icon { background: #20354b; color: #edbd79; }
+html[data-theme="dark"] .kn-service-panel,
+html[data-theme="dark"] .kn-form-card,
+html[data-theme="dark"] .kn-consent { background: #17283b; border-color: var(--kn-line); color: var(--kn-ink); }
+html[data-theme="dark"] .kn-service-icon { background: #2a3545; color: #edbd79; }
+html[data-theme="dark"] .kn-service-options li { border-color: #34475b; color: #c1ccd7; }
+html[data-theme="dark"] .kn-service-detail { background: #1b2d42; border-color: var(--kn-line); }
+html[data-theme="dark"] .kn-service-detail ul { color: #c1ccd7; }
+html[data-theme="dark"] .kn-service-note { color: #aab8c5; }
+html[data-theme="dark"] .kn-contact-aside-note { border-color: var(--kn-line); }
+html[data-theme="dark"] .kn-contact-aside-note p,
+html[data-theme="dark"] .kn-form-alternative { color: #b2bfcc; }
+html[data-theme="dark"] .kn-field { color: #e1e8ef; }
+html[data-theme="dark"] .kn-field small { color: #a7b3bf; }
+html[data-theme="dark"] .kn-field input,
+html[data-theme="dark"] .kn-field select,
+html[data-theme="dark"] .kn-field textarea,
+html[data-theme="dark"] .kn-email-suggestions button {
+  border-color: #46596d;
+  background: #0f1b29;
+  color: var(--kn-ink);
+}
+html[data-theme="dark"] .kn-email-suggestions { color: #b2bfcc; }
+html[data-theme="dark"] .kn-email-suggestions button:hover,
+html[data-theme="dark"] .kn-email-suggestions button:focus-visible { background: #2b3543; }
+html[data-theme="dark"] .kn-form-submit>p,
+html[data-theme="dark"] .kn-form-alternative a,
+html[data-theme="dark"] .kn-daily-quote-text cite { color: #edbd79; }
+html[data-theme="dark"] .kn-lifestyle-hero-foot { color: #b2c4c6; }
+html[data-theme="dark"] .kn-lifestyle-cta h2 em,
+html[data-theme="dark"] .kn-about-card:not(.creator) h3 em,
+html[data-theme="dark"] .kn-contact-aside-note>span { color: #edbd79; }
+html[data-theme="dark"] .kn-button-secondary { background: #17283b; border-color: #526276; color: var(--kn-ink); }
+html[data-theme="dark"] .kn-button-secondary:hover { background: #22364c; }
 .kn-scroll-reveal { opacity: 0; transform: translateY(14px); transition: opacity .65s ease, transform .65s ease; }
 .kn-scroll-reveal.is-visible { opacity: 1; transform: none; }
 .kn-button:focus-visible { box-shadow: 0 0 0 4px rgba(233,159,71,.28); }
@@ -369,4 +525,47 @@ body:has(.kn-consent-backdrop) { overflow: hidden; }
   .kn-art-orbit-one,.kn-art-orbit-two { animation: none; }
   .kn-creator-art-frame::before,.kn-creator-art-frame::after { animation: none; }
   .kn-process-step[open]>p { animation: none; }
+}
+@media (max-width: 960px) {
+  .kn-header .kn-menu-toggle {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex: 0 0 auto;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    gap: 4px;
+    border: 1px solid rgba(233,159,71,.52);
+    border-radius: 10px;
+    background: transparent;
+  }
+  .kn-header .kn-menu-toggle span {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    margin: 0 auto;
+    border-radius: 2px;
+    background: #edbd79;
+  }
+  .kn-nav .kn-theme-toggle { align-self: flex-start; margin-top: 10px; }
+}
+@media (max-width: 700px) {
+  .kn-intro-grid { grid-template-columns: 1fr; gap: 20px; }
+  .kn-intro-grid>.kn-eyebrow,.kn-intro-grid>div,.kn-intro-grid .kn-intro-conversation { grid-column: 1; grid-row: auto; }
+  .kn-intro-grid>div { align-self: auto; }
+  .kn-intro-conversation { width: min(100%, 160px); height: 100px; min-height: 0; max-height: 100px; aspect-ratio: 16 / 9; object-position: center 45%; }
+  .kn-lifestyle-illustration { width: min(100%, 430px); justify-self: center; }
+  .kn-about-cta h2 { font-size: clamp(2.5rem, 10vw, 4rem); }
+  .kn-about-cta h2:hover .kn-cta-rocket,
+  .kn-about-cta:focus-within h2 .kn-cta-rocket { transform: translate(-22vw, 125px) rotate(-45deg) scale(.85); }
+  .kn-creator-hero { padding-top: 38px; }
+  .kn-creator-hero-copy h1 { font-size: clamp(2rem, 8vw, 2.8rem); }
+  .kn-creator-art-frame { min-height: 290px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kn-lifestyle-illustration .kn-lifestyle-logo { animation: none; }
+  .kn-about-cta .kn-cta-rocket { transition: none; }
+  .kn-about-cta h2:hover .kn-cta-rocket,
+  .kn-about-cta:focus-within h2 .kn-cta-rocket { opacity: 1; transform: none; }
 }

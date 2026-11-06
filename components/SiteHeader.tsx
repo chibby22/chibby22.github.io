@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const links = [
   { href: "/", label: "Home" },
@@ -16,6 +16,27 @@ const links = [
 export default function SiteHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    setTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+  }, []);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = nextTheme;
+    setTheme(nextTheme);
+
+    try {
+      localStorage.setItem("kynected-theme", nextTheme);
+    } catch (error) {
+      console.error("Could not save the Kynected theme preference.", error);
+    }
+  };
 
   return (
     <header className="kn-header">
@@ -55,6 +76,16 @@ export default function SiteHeader() {
             </Link>
           ))}
           <Link className="kn-nav-cta" href="/contact?type=general" onClick={() => setMenuOpen(false)}>Let’s talk <span aria-hidden="true">↗</span></Link>
+          <button
+            className="kn-theme-toggle"
+            type="button"
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            aria-pressed={theme === "dark"}
+            title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            onClick={toggleTheme}
+          >
+            <span aria-hidden="true">{theme === "dark" ? "☀" : "☾"}</span>
+          </button>
         </nav>
       </div>
     </header>
