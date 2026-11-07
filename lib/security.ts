@@ -57,58 +57,6 @@ export async function verifyRecaptcha(
   );
 }
 
-/*
-export async function forwardToFormSubmit(
-  payload: Record<string, string>,
-  requestOrigin: string
-) {
-  const endpoint = process.env.FORMSUBMIT_ENDPOINT;
-  if (!endpoint || !endpoint.startsWith("https://formsubmit.co/ajax/")) {
-    throw new Error("FORMSUBMIT_ENDPOINT is missing or invalid");
-  }
-  let originUrl: URL;
-  try {
-    originUrl = new URL(requestOrigin);
-  } catch {
-    throw new Error("Request origin is invalid");
-  }
-  if (originUrl.origin !== requestOrigin || !["http:", "https:"].includes(originUrl.protocol)) {
-    throw new Error("Request origin is invalid");
-  }
-
-  const response = await fetch(endpoint, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      ...payload,
-      _template: "table",
-      _captcha: "false",
-    }),
-    cache: "no-store",
-    signal: AbortSignal.timeout(10000),
-  });
-
-  if (!response.ok) {
-    console.error("FormSubmit request failed", { status: response.status });
-    throw new Error(`FormSubmit returned HTTP ${response.status}`);
-  }
-
-  const result = (await response.json()) as {
-    success?: boolean | string;
-    message?: string;
-  };
-  if (result.success !== true && result.success !== "true") {
-    console.error("FormSubmit did not accept the contact submission", {
-      success: result.success ?? false,
-    });
-    throw new Error(result.message || "FormSubmit did not accept the submission");
-  }
-}
-*/
-
 export async function forwardToFormSpark(
   payload: Record<string, string>,
   requestOrigin: string

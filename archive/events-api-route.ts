@@ -31,8 +31,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Captcha verification failed." }, { status: 400 });
     }
 
-    // FormSubmit forwarding is disabled.
-
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("Events route failed", error);
