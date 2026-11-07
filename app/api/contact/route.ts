@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import {
-  forwardToFormSubmit,
+  forwardToFormSpark,
   normaliseText,
   originAllowed,
   validEmail,
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
 // 3. Validated the visitor's name/email/message.
 // 4. Verified Google reCAPTCHA using the PRIVATE secret key.
 //
-// Only after those checks do we forward the message to FormSubmit.
+// Only after those checks do we forward the message to Formspark.
 
     const extraFields: Array<[string, string, number]> = [
       ["Company", body.companyName, 160],
@@ -73,7 +73,7 @@ export async function POST(request: Request) {
       general: "General Enquiry",
     };
 
-    await forwardToFormSubmit({
+    await forwardToFormSpark({
       _subject: `Kynected ${categoryLabels[enquiryType]} — ${name}`,
       form_type: "contact",
       enquiry_type: categoryLabels[enquiryType],

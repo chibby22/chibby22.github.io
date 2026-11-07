@@ -75,26 +75,23 @@ export async function forwardToFormSubmit(
     throw new Error("Request origin is invalid");
   }
 
-  const formData = new URLSearchParams();
-  for (const [key, value] of Object.entries(payload)) {
-    formData.append(key, value);
-  }
-  formData.append("_template", "table");
-  formData.append("_captcha", "false");
-
   const response = await fetch(endpoint, {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/x-www-form-urlencoded",
-      Origin: originUrl.origin,
-      Referer: `${originUrl.origin}/`,
+      "Content-Type": "application/json",
     },
-    body: formData.toString(),
+    body: JSON.stringify({
+      ...payload,
+      _template: "table",
+      _captcha: "false",
+    }),
     cache: "no-store",
+    signal: AbortSignal.timeout(10000),
   });
 
   if (!response.ok) {
+    console.error("FormSubmit request failed", { status: response.status });
     throw new Error(`FormSubmit returned HTTP ${response.status}`);
   }
 
@@ -103,6 +100,49 @@ export async function forwardToFormSubmit(
     message?: string;
   };
   if (result.success !== true && result.success !== "true") {
+    console.error("FormSubmit did not accept the contact submission", {
+      success: result.success ?? false,
+    });
     throw new Error(result.message || "FormSubmit did not accept the submission");
+  }
+}
+
+export async function forwardToFormSpark(
+  payload: Record<string, string>,
+  requestOrigin: string
+) {
+  const formId = process.env.FORMSPARK_FORM_ID;
+  if (!formId || !/^[A-Za-z0-9_-]+$/.test(formId)) {
+    throw new Error("FORMSPARK_FORM_ID is missing or invalid");
+  }
+
+  let originUrl: URL;
+  try {
+    originUrl = new URL(requestOrigin);
+  } catch {
+    throw new Error("Request origin is invalid");
+  }
+  if (
+    originUrl.origin !== requestOrigin ||
+    !["http:", "https:"].includes(originUrl.protocol)
+  ) {
+    throw new Error("Request origin is invalid");
+  }
+
+  const response = await fetch(`https://submit-form.com/${formId}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Origin: originUrl.origin,
+    },
+    body: JSON.stringify(payload),
+    cache: "no-store",
+    signal: AbortSignal.timeout(10000),
+  });
+
+  if (!response.ok) {
+    console.error("Formspark request failed", { status: response.status });
+    throw new Error(`Formspark returned HTTP ${response.status}`);
   }
 }
