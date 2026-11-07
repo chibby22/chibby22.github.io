@@ -57,6 +57,7 @@ export async function verifyRecaptcha(
   );
 }
 
+/*
 export async function forwardToFormSubmit(
   payload: Record<string, string>,
   requestOrigin: string
@@ -106,6 +107,7 @@ export async function forwardToFormSubmit(
     throw new Error(result.message || "FormSubmit did not accept the submission");
   }
 }
+*/
 
 export async function forwardToFormSpark(
   payload: Record<string, string>,

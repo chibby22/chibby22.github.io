@@ -2,7 +2,6 @@
 // Kept as a reference for the former Kynected Events signup flow.
 import { NextResponse } from "next/server";
 import {
-  forwardToFormSubmit,
   normaliseText,
   originAllowed,
   validEmail,
@@ -32,15 +31,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Captcha verification failed." }, { status: 400 });
     }
 
-    await forwardToFormSubmit({
-      _subject: `Kynected Events Interest — ${name}`,
-      form_type: "events_mailing_list",
-      name,
-      email,
-      events_interested_in: events || "None specified",
-      consent: "yes",
-      date: new Date().toISOString()
-    }, request.headers.get("origin") || "");
+    // FormSubmit forwarding is disabled.
 
     return NextResponse.json({ ok: true });
   } catch (error) {
