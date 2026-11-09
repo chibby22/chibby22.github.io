@@ -267,6 +267,15 @@ body:has(.kn-consent-backdrop) { overflow: hidden; }
   from { opacity: 0; transform: translateY(-5px); }
   to { opacity: 1; transform: translateY(0); }
 }
+.kn-faq-section { background: #f8f7f4; }
+.kn-faq-section .kn-section-heading>div { max-width: 560px; }
+.kn-faq-list { max-width: 920px; margin-left: auto; border-top: 1px solid var(--kn-line); }
+.kn-faq-item { border-bottom: 1px solid var(--kn-line); }
+.kn-faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 21px 5px; color: var(--kn-ink); cursor: pointer; font-family: var(--kn-display); font-size: clamp(1.05rem, 2vw, 1.4rem); list-style: none; }
+.kn-faq-item summary::-webkit-details-marker { display: none; }
+.kn-faq-item summary::after { content: "+"; flex: 0 0 auto; color: #ad7936; font-family: var(--kn-sans); font-size: 1.25rem; transition: transform .2s ease; }
+.kn-faq-item[open] summary::after { transform: rotate(45deg); }
+.kn-faq-item>p { max-width: 760px; margin: 0 42px 22px 5px; color: var(--kn-muted); font-size: .91rem; line-height: 1.75; }
 .kn-daily-quote { padding-block: 55px; background: #f8f7f4; }
 .kn-daily-quote-text {
   margin: 14px 0 0;
@@ -403,7 +412,8 @@ html[data-theme="dark"] .kn-contact-section,
 html[data-theme="dark"] .kn-lifestyle-services { background: #0f1b29; }
 html[data-theme="dark"] .kn-audience-section,
 html[data-theme="dark"] .kn-divisions-section,
-html[data-theme="dark"] .kn-about-divisions { background: #111f2f; }
+html[data-theme="dark"] .kn-about-divisions,
+html[data-theme="dark"] .kn-faq-section { background: #111f2f; }
 html[data-theme="dark"] .kn-brands-section { background: #15263a; border-color: #34475b; }
 html[data-theme="dark"] .kn-daily-quote { background: #142439; }
 html[data-theme="dark"] .kn-daily-quote-text { color: #eef3f8; }

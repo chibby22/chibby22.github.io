@@ -1,6 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import DailyQuote from "@/components/DailyQuote";
+import JsonLd from "@/components/JsonLd";
+
+const creatorFaqs = [
+  {
+    question: "What partnership support does Kynected offer creators?",
+    answer:
+      "Kynected can look for brands and opportunities that may align with your content and audience, contact relevant brands, and help coordinate discussions. Any collaboration depends on mutual interest and agreed terms.",
+  },
+  {
+    question: "How can a brand find creators for a campaign?",
+    answer:
+      "Share your campaign objectives, brand identity and target audience. Kynected can research creators who may fit, contact suitable creators to explore interest, and help coordinate communication. Creator metrics and audience details are organised where available and appropriately shared.",
+  },
+  {
+    question: "Does Kynected guarantee that a creator partnership will happen?",
+    answer:
+      "No. A commercial opportunity is not confirmed until the brand and creator have expressed mutual interest and agreed to the collaboration.",
+  },
+];
 
 const creatorServices = [
   ["01/04", "Finding Brand Opportunities", "We identify brands and commercial opportunities that may align with your content and audience."],
@@ -29,6 +48,17 @@ function ServiceCards({ services, tone }: { services: string[][]; tone: "creator
 export default function CreatorPartnershipsPage() {
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: creatorFaqs.map(({ question, answer }) => ({
+            "@type": "Question",
+            name: question,
+            acceptedAnswer: { "@type": "Answer", text: answer },
+          })),
+        }}
+      />
       <section className="kn-creator-hero">
         <div className="kn-creator-grid-bg" aria-hidden="true" />
         <div className="kn-container kn-creator-hero-grid">
@@ -60,6 +90,23 @@ export default function CreatorPartnershipsPage() {
       </section>
 
       <section className="kn-section kn-categories-section"><div className="kn-container"><div className="kn-section-heading"><div><span className="kn-eyebrow">04 / Who we can help</span><h2>The Right Connections<br /><em>for Different fields.</em></h2></div><p>These are some of the industries and clients we can support. Our services are not limited to the categories listed.</p></div><div className="kn-category-grid">{categories.map((category, index) => <div className="kn-category-chip" key={category}><span>0{index + 1}</span>{category}<b aria-hidden="true">↗</b></div>)}</div></div></section>
+
+      <section className="kn-section kn-faq-section">
+        <div className="kn-container">
+          <div className="kn-section-heading">
+            <div><span className="kn-eyebrow">Creator and brand partnerships</span><h2>Common <em>Questions.</em></h2></div>
+            <p>How Kynected approaches creator outreach and potential collaborations.</p>
+          </div>
+          <div className="kn-faq-list">
+            {creatorFaqs.map(({ question, answer }) => (
+              <details className="kn-faq-item" key={question}>
+                <summary>{question}</summary>
+                <p>{answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="kn-section kn-daily-quote"><div className="kn-container"><span className="kn-eyebrow">A thought for today</span><DailyQuote /></div></section>
 

@@ -6,22 +6,25 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import SitePreferences from "@/components/SitePreferences";
 import ScrollReveals from "@/components/ScrollReveals";
+import JsonLd from "@/components/JsonLd";
 import "./multipage.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kynected.co.uk"),
-  title: "KYNECTED | Creator Partnerships & Home Lifestyle Services",
+  title: "Kynected | Creator Partnerships & Home Services",
   description:
-    "Kynected connects creators with brand opportunities and helps individuals and businesses find practical home and lifestyle support.",
+    "Kynected connects brands with creators and helps creators explore partnerships, alongside cleaning and practical home and lifestyle support.",
   authors: [{ name: "KYNECTED" }],
   icons: { icon: "/images/justK_trans.png" },
   alternates: { canonical: "/" },
   openGraph: {
-    title: "KYNECTED | Creator Partnerships & Home Lifestyle Services",
-    description: "Creator and brand partnership enquiries, plus practical home and lifestyle services from Kynected.",
+    title: "Kynected | Creator Partnerships & Home Services",
+    description:
+      "Kynected connects brands with creators and helps creators explore partnerships, alongside cleaning and practical home and lifestyle support.",
     url: "https://kynected.co.uk",
     type: "website",
-    locale: "en_GB"
+    siteName: "Kynected",
+    locale: "en_GB",
   },
   robots: {
     index: true,
@@ -57,6 +60,41 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <SiteFooter />
         <SitePreferences />
         <ScrollReveals />
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Organization",
+                "@id": "https://kynected.co.uk/#organization",
+                name: "Kynected",
+                url: "https://kynected.co.uk/",
+                logo: "https://kynected.co.uk/images/justK_trans.png",
+                email: "kynectedsolutions@outlook.com",
+                telephone: "+447440034201",
+                sameAs: [
+                  "https://www.facebook.com/share/1BMqi7Eixs/?mibextid=wwXIfr",
+                  "https://www.instagram.com/kynectedd/",
+                ],
+                contactPoint: {
+                  "@type": "ContactPoint",
+                  contactType: "customer enquiries",
+                  email: "kynectedsolutions@outlook.com",
+                  telephone: "+447440034201",
+                  availableLanguage: "English",
+                },
+              },
+              {
+                "@type": "WebSite",
+                "@id": "https://kynected.co.uk/#website",
+                name: "Kynected",
+                url: "https://kynected.co.uk/",
+                publisher: { "@id": "https://kynected.co.uk/#organization" },
+                inLanguage: "en-GB",
+              },
+            ],
+          }}
+        />
       </body>
     </html>
   );
